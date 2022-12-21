@@ -5,6 +5,7 @@ import MovieCard from './MovieCard'
 export default function Movies() {
 
     const [movies, setMovies] = useState([])
+    const [movieSearch, setMovieSearch] = useState(null)
 
 
     useEffect(() => {
@@ -21,10 +22,20 @@ export default function Movies() {
         console.log(movies)
     }, [])
 
+    function onSubmit(e) {
+        e.preventDefault()
+    }
+
 
     return (
         <div>
             <h1>Movies</h1>
+            <div>
+            <form>
+                <input type="text" value={movieSearch}></input>
+                <button >search</button>
+            </form>
+            </div>
             <div className='movie-container'>
                 {movies.map(movie => {
                     return <MovieCard movie={movie} />
