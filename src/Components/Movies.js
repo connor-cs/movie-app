@@ -5,7 +5,7 @@ import MovieCard from './MovieCard'
 export default function Movies() {
 
     const [movies, setMovies] = useState([])
-    const [movieSearch, setMovieSearch] = useState(null)
+    const [movieSearch, setMovieSearch] = useState()
 
 
     useEffect(() => {
