@@ -14,9 +14,7 @@ export default function Movies() {
             const json = await movieData.json()
             setMovies(json.results)
             console.log('movies', movies)
-
         }
-
 
         fetchMovie()
         console.log(movies)
@@ -24,6 +22,11 @@ export default function Movies() {
 
     function onSubmit(e) {
         e.preventDefault()
+        console.log('moviesearch', movieSearch)
+    }
+
+    function onChange(e) {
+        setMovieSearch(e.target.value)
     }
 
 
@@ -31,10 +34,10 @@ export default function Movies() {
         <div>
             <h1>Movies</h1>
             <div>
-            <form>
-                <input type="text" value={movieSearch}></input>
-                <button >search</button>
-            </form>
+                <form onSubmit={onSubmit}>
+                    <input type="text" value={movieSearch} onChange={onChange}></input>
+                    <button type="submit">search</button>
+                </form>
             </div>
             <div className='movie-container'>
                 {movies.map(movie => {
