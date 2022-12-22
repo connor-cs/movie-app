@@ -5,7 +5,7 @@ import MovieCard from './MovieCard'
 export default function Movies() {
 
     const [movies, setMovies] = useState([])
-    const [movieSearch, setMovieSearch] = useState(null)
+    const [movieSearch, setMovieSearch] = useState()
 
 
     useEffect(() => {
@@ -31,7 +31,7 @@ export default function Movies() {
 
 
     return (
-        <div>
+        <div className='movie-page'>
             <h1>Movies</h1>
             <div>
                 <form onSubmit={onSubmit}>
