@@ -39,10 +39,10 @@ export default function Sidebar() {
     ]
     return (
         <div className='side-bar-container'>
-            <div style={{display: isOpen ? "block" : "none"}} className='sidebar'>
+            <div style={{width: isOpen ? "200px" : "50px"}} className='sidebar'>
                 <div className="top-section">
-                    <h1 className='top'>Top</h1>
-                    <div className="bars">
+                    <h1 style={{display: isOpen ? "block" : "none"}}className='top'>Top</h1>
+                    <div style={{marginLeft: isOpen ? "50px" : "0px"}}className="bars">
                         <FaBars onClick={toggle}/>
                     </div>
                 </div>
