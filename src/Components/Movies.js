@@ -31,7 +31,7 @@ export default function Movies() {
 
 
     return (
-        <div>
+        <div className='movie-page'>
             <h1>Movies</h1>
             <div>
                 <form onSubmit={onSubmit}>

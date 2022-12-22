@@ -1,11 +1,6 @@
-.App {
+/* .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+} */
 
 
 
@@ -34,7 +29,17 @@
   margin: 5px;
 }
 
+/* .sidebar-container {
+  align-items: left;
+  display: flex;
+}
+
+.sidebar {
+  transition: all 0.5s;
+} */
+
 .movie-container {
+  align-items: center;
   display: grid;
   grid-template-columns: repeat(3,1fr);
 }

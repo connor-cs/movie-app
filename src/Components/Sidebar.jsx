@@ -1,4 +1,5 @@
 import React from 'react'
+import '../sidebar.css'
 import { FaBars, FaHome, FaInfo, FaUserAlt } from 'react-icons/fa'
 import { TbMovie, TbDeviceTv } from "react-icons/tb";
 import { NavLink } from 'react-router-dom';
@@ -6,7 +7,7 @@ import { useState } from 'react';
 
 export default function Sidebar() {
 
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(true)
     const toggle = () => setIsOpen(!isOpen)
 
     const menuItem = [
@@ -38,10 +39,12 @@ export default function Sidebar() {
     ]
     return (
         <div className='side-bar-container'>
-            <div className='sidebar'>
+            <div style={{display: isOpen ? "block" : "none"}} className='sidebar'>
                 <div className="top-section">
-                    <h1>Top</h1>
-                    <FaBars />
+                    <h1 className='top'>Top</h1>
+                    <div className="bars">
+                        <FaBars onClick={toggle}/>
+                    </div>
                 </div>
                 <div className='side-bar-body'>
                     {
