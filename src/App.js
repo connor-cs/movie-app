@@ -20,7 +20,7 @@ function App() {
         <Route path='/movies' element={<Movies />} ></Route>
       </Routes>
     </div>
-  );
+  )
 }
 
 export default App;
