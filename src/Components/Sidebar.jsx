@@ -13,7 +13,7 @@ export default function Sidebar() {
     const menuItem = [
         {
             path: "/",
-            name: "Landing Page",
+            name: "Home",
             icon: <FaHome />
         },
         {
@@ -41,7 +41,7 @@ export default function Sidebar() {
         <div className='side-bar-container'>
             <div style={{width: isOpen ? "200px" : "50px"}} className='sidebar'>
                 <div className="top-section">
-                    <h1 style={{display: isOpen ? "block" : "none"}}className='top'>Top</h1>
+                    <h1 style={{display: isOpen ? "block" : "none"}}className='top'>Top text</h1>
                     <div style={{marginLeft: isOpen ? "50px" : "0px"}}className="bars">
                         <FaBars onClick={toggle}/>
                     </div>

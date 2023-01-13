@@ -24,12 +24,12 @@ export default function Movies() {
     }, [])
 
     //this makes api call to get return user's search results
-    //maybe try using useQuery??
     const getSearchResults = async (searchInput) => {
-        const data = await fetch(`https://api.themoviedb.org/3/search/keyword?api_key=${key}&query=${searchInput}&page=1`)
+        const data = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&query=${searchInput}&page=1&include_adult=false`)
         const json = await data.json()
         //unfortunately the results only seem to be name and a movie id, so insufficient for displaying a moviecard
         console.log("search results:", json.results)
+
         setSearchResults(json.results)
     }
 
@@ -51,6 +51,7 @@ export default function Movies() {
 
             <div className='search-bar'>
                 <MdSearch className='search-icon' size="1.3em" />
+                
                 <input
                     className='search-input'
                     type="text"
