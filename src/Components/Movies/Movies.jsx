@@ -23,6 +23,7 @@ export default function Movies() {
 
     //this makes api call to get return user's search results
     const getSearchResults = async (searchInput) => {
+        console.log(searchInput)
         const data = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&query=${searchInput}&page=1&include_adult=false`)
         const json = await data.json()
         setSearchResults(json.results)
@@ -30,9 +31,7 @@ export default function Movies() {
 
     //get user text input and set it to state
     function handleSearchInput(e) {
-        e.preventDefault()
         setSearchInput(e.target.value)
-        //clear text from search input
         getSearchResults(searchInput)
     }
 
@@ -52,10 +51,9 @@ export default function Movies() {
                 <input
                     className='search-input'
                     type="text"
-                    onChange={handleSearchInput}>
+                    onChange={handleSearchInput}
+                    placeholder="search movies">
                 </input>
-
-                <button type="submit">search</button>
             </div>
 
             <div className='movie-container'>

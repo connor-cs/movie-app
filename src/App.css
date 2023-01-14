@@ -61,7 +61,6 @@ div .app{
   align-items: center;
   background-color: #282c34;
   display: grid;
-  /* border: solid red; */
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-evenly;
@@ -98,6 +97,16 @@ div .app{
 
 .search-bar input:focus{
 outline: none;
+}
+
+.show-container {
+  align-items: center;
+  background-color: #282c34;
+  display: grid;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  grid-template-columns: repeat(4, minmax(100px, 1fr));
 }
 
 .star-icon:hover{
