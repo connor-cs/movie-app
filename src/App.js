@@ -1,9 +1,8 @@
 
 import './App.css';
-import NavBar from './Components/NavBar';
 import LandingPage from './Components/LandingPage';
-import TVShows from './Components/TVShows';
-import Movies from './Components/Movies';
+import TVShows from './Components/Shows/TVShows';
+import Movies from './Components/Movies/Movies';
 import { Route, Routes } from 'react-router-dom';
 import About from './Components/About';
 import Sidebar from './Components/Sidebar';
