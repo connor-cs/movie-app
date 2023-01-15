@@ -4,11 +4,17 @@ import { FaBars, FaHome, FaInfo, FaUserAlt } from 'react-icons/fa'
 import { TbMovie, TbDeviceTv } from "react-icons/tb";
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
+import { LoggedInContext } from './Context';
+import { useContext } from 'react';
 
 export default function Sidebar() {
 
+    const {loggedInState} =useContext(LoggedInContext)
     const [isOpen, setIsOpen] = useState(true)
     const toggle = () => setIsOpen(!isOpen)
+
+    const navbarItem1 = (loggedInState) ? '/user' : '/signup'
+    const navbarItem2 = (loggedInState) ? 'My Account' : 'Sign in'
 
     const menuItem = [
         {
@@ -27,8 +33,8 @@ export default function Sidebar() {
             icon: <TbDeviceTv />
         },
         {
-            path: "/user",
-            name: "My Account",
+            path: `${navbarItem1}`,
+            name: `${navbarItem2}`,
             icon: <FaUserAlt />
         },
         {
@@ -37,6 +43,7 @@ export default function Sidebar() {
             icon: <FaInfo />
         },
     ]
+    console.log('loggedinstate',loggedInState)
     return (
         <div className='side-bar-container'>
             <div style={{width: isOpen ? "200px" : "50px"}} className='sidebar'>
