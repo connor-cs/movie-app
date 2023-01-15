@@ -1,9 +1,14 @@
 import React from 'react'
+import { useContext } from 'react'
 import { AiOutlineStar } from 'react-icons/ai'
+import { LoggedInContext } from '../Context'
 
 export default function MovieCard({ movie }) {
+  const { loggedInState } = useContext(LoggedInContext)
 
   const handleLikeClick = () => {
+    if (loggedInState == false) { alert('Must be signed in to add to watchlist!') }
+
     const clickedMovie = {
       id: movie.id,
       title: movie.title,
@@ -11,6 +16,7 @@ export default function MovieCard({ movie }) {
     }
     console.log(clickedMovie)
   }
+
   return (
     <div className='card' key={movie.id}>
       <h3>{movie.title}</h3>
