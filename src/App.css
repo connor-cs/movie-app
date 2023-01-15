@@ -113,3 +113,22 @@ outline: none;
 cursor: pointer;
 transform: scale(1.3);
 }
+
+div .signup-page{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div .signup-form-container {
+  background-color: lightgrey;
+  display: flex;
+  justify-content: center;
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+  background-color: lightgray;
+  border-radius: 10px;
+}

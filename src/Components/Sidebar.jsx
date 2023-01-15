@@ -13,6 +13,9 @@ export default function Sidebar() {
     const [isOpen, setIsOpen] = useState(true)
     const toggle = () => setIsOpen(!isOpen)
 
+    const navbarItem1 = (loggedInState) ? '/user' : '/signup'
+    const navbarItem2 = (loggedInState) ? 'My Account' : 'Sign in'
+
     const menuItem = [
         {
             path: "/",
@@ -30,8 +33,8 @@ export default function Sidebar() {
             icon: <TbDeviceTv />
         },
         {
-            path: "/user",
-            name: "My Account",
+            path: `${navbarItem1}`,
+            name: `${navbarItem2}`,
             icon: <FaUserAlt />
         },
         {

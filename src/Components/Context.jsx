@@ -1,15 +1,16 @@
-import React, {useState, createContext} from "react";
+import React, { useState, createContext } from "react";
 
 export const LoggedInContext = createContext()
 
 export const ContextProvider = (props) => {
     const [loggedInState, setLoggedInState] = useState(false)
     const [user, setUser] = useState({
-        userName: ''
+        userName: '',
+        userId: ''
     })
     return (
-        <ContextProvider value={{loggedInState, setLoggedInState, user, setUser}}>
+        <LoggedInContext.Provider value={{ loggedInState, setLoggedInState, user, setUser }}>
             {props.children}
-        </ContextProvider>
+        </LoggedInContext.Provider>
     )
 }
