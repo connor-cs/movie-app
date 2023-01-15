@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { nanoid } from 'nanoid'
 
 export default function Signup() {
 
@@ -24,13 +25,25 @@ export default function Signup() {
         })
     }
     function handleSignupUsername(e) {
-
+        setSignupData({
+            ...signupData,
+            username: e.target.value
+        })
     }
     function handleSignupPassword(e) {
-
+        setSignupData({
+            ...signupData,
+            password: e.target.value
+        })
     }
 
-
+    function createNewUser() {
+        const newUser = {
+            id: nanoid(),
+            username: signupData.username,
+            password: signupData.password
+        }
+    }
 
     return (
         <div>
