@@ -8,7 +8,7 @@ import { LoggedInContext } from './Context';
 import { useContext } from 'react';
 
 export default function Sidebar() {
-
+    
     const {loggedInState} =useContext(LoggedInContext)
     const [isOpen, setIsOpen] = useState(true)
     const toggle = () => setIsOpen(!isOpen)
@@ -58,7 +58,7 @@ export default function Sidebar() {
                         menuItem.map((item, index) => (
                             <NavLink to={item.path} key={index} className='link'>
                                 <div className='icon'>{item.icon}</div>
-                                <div className='link-text'>{item.name}</div>
+                                {isOpen ? <div className='link-text'>{item.name}</div> : null}
                             </NavLink>
                         ))
                     }
