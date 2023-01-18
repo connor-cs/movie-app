@@ -1,12 +1,12 @@
 import React from 'react'
 import { useContext } from 'react'
-import { LoggedInContext } from './Context'
+import { UserContext } from './Context'
 import { db } from '../firebase-config'
 import { collection, getDocs } from 'firebase/firestore'
 import { useEffect } from 'react'
 
 export default function User() {
-    const { loggedInState, setLoggedInState } = useContext(LoggedInContext)
+    const { loggedInState, setLoggedInState } = useContext(UserContext)
 
     // const userCollectionRef = collection(db, "users")
 

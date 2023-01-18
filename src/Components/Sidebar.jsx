@@ -3,11 +3,11 @@ import '../sidebar.css'
 import { FaBars, FaHome, FaInfo, FaUserAlt } from 'react-icons/fa'
 import { TbMovie, TbDeviceTv } from "react-icons/tb";
 import { NavLink } from 'react-router-dom';
-import { LoggedInContext } from './Context';
+import { UserContext } from './Context';
 
 export default function Sidebar() {
 
-    const {loggedInState} =useContext(LoggedInContext)
+    const {loggedInState} =useContext(UserContext)
     const [isOpen, setIsOpen] = useState(true)
     const toggle = () => setIsOpen(!isOpen)
 

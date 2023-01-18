@@ -1,17 +1,53 @@
-import React, { useState, createContext } from "react";
+import { updateCurrentUser } from "firebase/auth";
+import React, { useState, createContext, useContext } from "react";
+import {auth} from '../firebase-config.js'
 
-export const LoggedInContext = createContext()
+export const UserContext = createContext()
 
+//redundant?
+export function useAuthContext(){
+    return useContext(UserContext)
+}
 
 export const ContextProvider = (props) => {
     const [loggedInState, setLoggedInState] = useState(false)
-    const [user, setUser] = useState({
+    const [currentUser, setCurrentUser] = useState({
         userName: '',
         userId: ''
     })
+    
+    function signup(email, password) {
+        return auth.createUserWithEmailandPassword(email, password)
+    }
+
+    function login(email, password) {
+        return auth.signInWithEmailAndPassword(email, password)
+    }
+    function logout(){
+        return auth.signOut()
+    }
+    function updateEmail(email) {
+        return currentUser.updateEmail(email)
+    }
+    function updatePassword(password) {
+        return currentUser.updatePassword(password)
+    }
+
+    const value= {
+        currentUser,
+        loggedInState,
+        setLoggedInState,
+        login,
+        signup,
+        logout,
+        updateEmail,
+        updatePassword
+    }
+    
+    
     return (
-        <LoggedInContext.Provider value={{ loggedInState, setLoggedInState, user, setUser }}>
+        <UserContext.Provider value={value}>
             {props.children}
-        </LoggedInContext.Provider>
+        </UserContext.Provider>
     )
 }

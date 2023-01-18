@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react'
 import { nanoid } from 'nanoid'
-import { LoggedInContext } from './Context'
+import { UserContext, useAuthContext } from './Context'
 
 export default function Signup() {
-    const {loggedInState, setLoggedInState, user, setUser}=useContext(LoggedInContext)
+    const {loggedInState, setLoggedInState, user, setUser}=useContext(UserContext)
+    const {signup} = useAuthContext()
     const [loginData, setLoginData] = useState({
         username: '',
         password: ''
@@ -15,6 +16,7 @@ export default function Signup() {
 
     return (
         <div>
+            {/* login form */}
             <div className='login-form-container form-container'>
                 <form className='login-form'>
                     <input
@@ -31,6 +33,8 @@ export default function Signup() {
                     </input>
                     <button type="submit" onClick={handleLoginClick}>Login</button>
                 </form>
+                
+                {/* signup form */}
                 <span style={{color: "white"}}>Or sign up here:</span>
                 <div className="signup-form-container form-container">
                     <form className='signup-form'>
@@ -44,6 +48,11 @@ export default function Signup() {
                             value={signupData.username}
                             onChange={handleSignupPassword}>
                         </input>
+                        <input
+                            type='password'
+                            value={signupData.username}
+                            onChange={handleSignupPassword}>
+                        </input>
                         <button>Sign up</button>
                     </form>
                 </div>
@@ -51,6 +60,7 @@ export default function Signup() {
         </div>
     )
 
+    //helper functions
     function handleLoginClick(e){
         e.preventDefault()
         console.log(loginData)
