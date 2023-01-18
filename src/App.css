@@ -9,7 +9,7 @@
   font-family: 'Roboto', sans-serif;
 }
 
-div .app{
+div .App{
   display: flex;
 }
 
@@ -117,6 +117,11 @@ transform: scale(1.3);
 div .signup-page{
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+
+.form{
+  display: flex;
   justify-content: center;
 }
 

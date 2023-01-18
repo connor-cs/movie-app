@@ -1,21 +1,25 @@
 import React, { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { nanoid } from 'nanoid'
 import { UserContext, useAuthContext } from './Context'
 
 export default function Signup() {
     const {loggedInState, setLoggedInState, user, setUser}=useContext(UserContext)
     const {signup} = useAuthContext()
+    const navigate = useNavigate()
     const [loginData, setLoginData] = useState({
         username: '',
         password: ''
     })
     const [signupData, setSignupData] = useState({
         username: '',
-        password: ''
+        password: '', 
+        passwordConfirm: ''
     })
+    const [errors, setErrors] = useState('')
 
     return (
-        <div>
+        <div className='form'>
             {/* login form */}
             <div className='login-form-container form-container'>
                 <form className='login-form'>
@@ -37,7 +41,7 @@ export default function Signup() {
                 {/* signup form */}
                 <span style={{color: "white"}}>Or sign up here:</span>
                 <div className="signup-form-container form-container">
-                    <form className='signup-form'>
+                    <form className='signup-form' onSubmit={createNewUser}>
                         <input
                             type='text'
                             value={signupData.username}
@@ -45,13 +49,13 @@ export default function Signup() {
                         </input>
                         <input
                             type='password'
-                            value={signupData.username}
+                            value={signupData.password}
                             onChange={handleSignupPassword}>
                         </input>
                         <input
                             type='password'
-                            value={signupData.username}
-                            onChange={handleSignupPassword}>
+                            value={signupData.passwordConfirm}
+                            onChange={handleSignupPasswordConfirm}>
                         </input>
                         <button>Sign up</button>
                     </form>
@@ -93,12 +97,27 @@ export default function Signup() {
             password: e.target.value
         })
     }
-
-    function createNewUser() {
-        const newUser = {
-            id: nanoid(),
-            username: signupData.username,
-            password: signupData.password
-        }
+    function handleSignupPasswordConfirm(e) {
+        setSignupData({
+            ...signupData,
+            passwordConfirm: e.target.value
+        })
     }
+
+    async function createNewUser(e) {
+        console.log('clicked')
+        e.preventDefault()
+        if (signupData.password !== signupData.passwordConfirm){
+            console.log("Passwords do not match")
+        }
+        try {
+            await signup(signupData.username, signupData.password)
+            navigate('/')
+            console.log(signupData, 'success')
+        } 
+        catch {setErrors("Failed to create an account")}
+        console.log('did it work?')
+        setLoggedInState(!loggedInState)
+    }
+    
 }

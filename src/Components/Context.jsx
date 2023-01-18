@@ -1,5 +1,5 @@
-import { updateCurrentUser } from "firebase/auth";
-import React, { useState, createContext, useContext } from "react";
+import { updateCurrentUser, StateChanged } from "firebase/auth";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import {auth} from '../firebase-config.js'
 
 export const UserContext = createContext()
@@ -17,13 +17,14 @@ export const ContextProvider = (props) => {
     })
     
     function signup(email, password) {
+        console.log('signupfunction called')
         return auth.createUserWithEmailandPassword(email, password)
     }
 
     function login(email, password) {
         return auth.signInWithEmailAndPassword(email, password)
     }
-    function logout(){
+    function logout() {
         return auth.signOut()
     }
     function updateEmail(email) {
@@ -32,6 +33,7 @@ export const ContextProvider = (props) => {
     function updatePassword(password) {
         return currentUser.updatePassword(password)
     }
+
 
     const value= {
         currentUser,

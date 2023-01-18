@@ -7,7 +7,7 @@ export default function MovieCard({ movie }) {
   const { loggedInState } = useContext(UserContext)
 
   const handleLikeClick = () => {
-    if (loggedInState == false) { alert('Must be signed in to add to watchlist!') }
+    if (loggedInState === false) { alert('Must be signed in to add to watchlist!') }
 
     const clickedMovie = {
       id: movie.id,
