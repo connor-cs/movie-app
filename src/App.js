@@ -16,6 +16,7 @@ function App() {
     <div className="App">
       <ContextProvider>
         <Sidebar />
+        <div className='main'>
         <Routes>
           <Route path='/' element={<LandingPage />}></Route>
           <Route path='/about' element={<About />}></Route>
@@ -24,6 +25,7 @@ function App() {
           <Route path='/user/:id' element={<User />}></Route>
           <Route path='/signup' element={<Signup />}></Route>
         </Routes>
+        </div>
       </ContextProvider>
     </div>
   )

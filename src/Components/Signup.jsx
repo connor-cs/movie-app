@@ -21,6 +21,7 @@ export default function Signup() {
     return (
         <div className='form'>
             {/* login form */}
+            <span style={{color: "white"}}>Login here:</span>
             <div className='login-form-container form-container'>
                 <form className='login-form'>
                     <input
@@ -39,20 +40,23 @@ export default function Signup() {
                 </form>
                 
                 {/* signup form */}
-                <span style={{color: "white"}}>Or sign up here:</span>
+                <span style={{color: "white"}}>Or create account here:</span>
                 <div className="signup-form-container form-container">
                     <form className='signup-form' onSubmit={createNewUser}>
                         <input
+                            placeholder='type username'
                             type='text'
                             value={signupData.username}
                             onChange={handleSignupUsername}>
                         </input>
                         <input
+                            placeholder='type password'
                             type='password'
                             value={signupData.password}
                             onChange={handleSignupPassword}>
                         </input>
                         <input
+                            placeholder='confirm password'
                             type='password'
                             value={signupData.passwordConfirm}
                             onChange={handleSignupPasswordConfirm}>
