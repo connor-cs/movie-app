@@ -12,38 +12,7 @@ export default function Signup() {
         password: ''
     })
 
-    function handleLoginUsername(e) {
-        setLoginData({
-            ...loginData,
-            username: e.target.value
-        })
-    }
-    function handleLoginPassword(e) {
-        setLoginData({
-            ...loginData,
-            password: e.target.value
-        })
-    }
-    function handleSignupUsername(e) {
-        setSignupData({
-            ...signupData,
-            username: e.target.value
-        })
-    }
-    function handleSignupPassword(e) {
-        setSignupData({
-            ...signupData,
-            password: e.target.value
-        })
-    }
-
-    function createNewUser() {
-        const newUser = {
-            id: nanoid(),
-            username: signupData.username,
-            password: signupData.password
-        }
-    }
+    
 
     return (
         <div>
@@ -82,4 +51,37 @@ export default function Signup() {
             </div>
         </div>
     )
+
+    function handleLoginUsername(e) {
+        setLoginData({
+            ...loginData,
+            username: e.target.value
+        })
+    }
+    function handleLoginPassword(e) {
+        setLoginData({
+            ...loginData,
+            password: e.target.value
+        })
+    }
+    function handleSignupUsername(e) {
+        setSignupData({
+            ...signupData,
+            username: e.target.value
+        })
+    }
+    function handleSignupPassword(e) {
+        setSignupData({
+            ...signupData,
+            password: e.target.value
+        })
+    }
+
+    function createNewUser() {
+        const newUser = {
+            id: nanoid(),
+            username: signupData.username,
+            password: signupData.password
+        }
+    }
 }
