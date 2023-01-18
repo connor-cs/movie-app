@@ -1,11 +1,9 @@
-import React from 'react'
+import React, {useContext, useState} from 'react'
 import '../sidebar.css'
 import { FaBars, FaHome, FaInfo, FaUserAlt } from 'react-icons/fa'
 import { TbMovie, TbDeviceTv } from "react-icons/tb";
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
 import { LoggedInContext } from './Context';
-import { useContext } from 'react';
 
 export default function Sidebar() {
 

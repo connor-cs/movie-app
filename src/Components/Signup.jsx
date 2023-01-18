@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { nanoid } from 'nanoid'
+import { LoggedInContext } from './Context'
 
 export default function Signup() {
-
+    const {loggedInState, setLoggedInState, user, setUser}=useContext(LoggedInContext)
     const [loginData, setLoginData] = useState({
         username: '',
         password: ''
@@ -11,8 +12,6 @@ export default function Signup() {
         username: '',
         password: ''
     })
-
-    
 
     return (
         <div>
@@ -30,9 +29,9 @@ export default function Signup() {
                         placeholder='type your password'
                         onChange={handleLoginPassword}>
                     </input>
-                    <button>Login</button>
+                    <button type="submit" onClick={handleLoginClick}>Login</button>
                 </form>
-                <span>Or sign up here:</span>
+                <span style={{color: "white"}}>Or sign up here:</span>
                 <div className="signup-form-container form-container">
                     <form className='signup-form'>
                         <input
@@ -52,13 +51,21 @@ export default function Signup() {
         </div>
     )
 
+    function handleLoginClick(e){
+        e.preventDefault()
+        console.log(loginData)
+    }
+
     function handleLoginUsername(e) {
+        e.preventDefault()
         setLoginData({
             ...loginData,
             username: e.target.value
         })
+        console.log(loginData.username)
     }
     function handleLoginPassword(e) {
+        e.preventDefault()
         setLoginData({
             ...loginData,
             password: e.target.value
