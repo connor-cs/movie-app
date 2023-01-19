@@ -11,7 +11,7 @@ export default function Sidebar() {
     const [isOpen, setIsOpen] = useState(true)
     const toggle = () => setIsOpen(!isOpen)
 
-    const navbarItem1 = (loggedInState) ? '/user' : '/signup'
+    const navbarItem1 = (loggedInState) ? '/user/:id' : '/signup'
     const navbarItem2 = (loggedInState) ? 'My Account' : 'Sign in'
 
     const menuItem = [

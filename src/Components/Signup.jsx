@@ -2,9 +2,18 @@ import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { nanoid } from 'nanoid'
 import { UserContext, useAuthContext } from './Context'
+import { db } from "../firebase-config";
+import {
+    collection,
+    getDocs,
+    addDoc,
+    updateDoc,
+    doc,
+    } from "firebase/firestore";
 
 export default function Signup() {
-    const {loggedInState, setLoggedInState, user, setUser}=useContext(UserContext)
+    const usersCollectionRef = collection(db, "users")
+    const {loggedInState, setLoggedInState, currentUser, setCurrentUser}=useContext(UserContext)
     const {signup} = useAuthContext()
     const navigate = useNavigate()
     const [loginData, setLoginData] = useState({
@@ -41,6 +50,7 @@ export default function Signup() {
                 
                 {/* signup form */}
                 <span style={{color: "white"}}>Or create account here:</span>
+                {errors ? <p>{errors}</p> : null}
                 <div className="signup-form-container form-container">
                     <form className='signup-form' onSubmit={createNewUser}>
                         <input
@@ -108,20 +118,42 @@ export default function Signup() {
         })
     }
 
+    // async function createNewUser(e) {
+    //     console.log('clicked')
+    //     e.preventDefault()
+    //     if (signupData.password !== signupData.passwordConfirm){
+    //         console.log("Passwords do not match")
+    //     }
+    //     try {
+    //         await signup(signupData.username, signupData.password)
+    //         navigate('/')
+    //         console.log(signupData, 'success')
+    //     } 
+    //     catch {setErrors("Failed to create an account")}
+    //     console.log('did it work?')
+    //     setLoggedInState(!loggedInState)
+    // }
+    
     async function createNewUser(e) {
-        console.log('clicked')
         e.preventDefault()
+
+        //check if passwords match
         if (signupData.password !== signupData.passwordConfirm){
-            console.log("Passwords do not match")
+            setErrors("Passwords do not match")
         }
         try {
-            await signup(signupData.username, signupData.password)
+            await addDoc(usersCollectionRef, {
+                username: signupData.username,
+                password: signupData.password
+            })
             navigate('/')
-            console.log(signupData, 'success')
         } 
         catch {setErrors("Failed to create an account")}
-        console.log('did it work?')
+        //set logged in context to true
         setLoggedInState(!loggedInState)
+        //set currentuser context to data that was just created
+        setCurrentUser({username: signupData.username, password: signupData.password})
+        console.log(currentUser)
     }
     
 }
