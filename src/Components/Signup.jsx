@@ -152,7 +152,7 @@ export default function Signup() {
         //set logged in context to true
         setLoggedInState(!loggedInState)
         //set currentuser context to data that was just created
-        setCurrentUser({username: signupData.username, password: signupData.password})
+        // setCurrentUser({username: signupData.username, password: signupData.password})
         console.log(currentUser)
     }
     
