@@ -16,6 +16,7 @@ export default function About() {
   const [newUserName, setNewUserName] = useState("");
   const [newPass, setNewPass] = useState("");
 
+  //this works fine
   useEffect(() => {
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
@@ -29,6 +30,7 @@ export default function About() {
     getUsers();
   }, []);
 
+  //this also works fine
   const createUser = async () => {
     await addDoc(usersCollectionRef, {
       username: newUserName,
@@ -36,6 +38,7 @@ export default function About() {
     });
   };
 
+  //this works fine too
   const updateUserName = async (id, changedUsername) => {
     console.log(id)
     console.log('changedName', changedUsername)

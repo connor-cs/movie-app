@@ -14,7 +14,7 @@ import {
 export default function Signup() {
     const usersCollectionRef = collection(db, "users")
     const {loggedInState, setLoggedInState, currentUser, setCurrentUser}=useContext(UserContext)
-    const {signup} = useAuthContext()
+    const {signup, auth} = useAuthContext()
     const navigate = useNavigate()
     const [loginData, setLoginData] = useState({
         username: '',
@@ -118,42 +118,43 @@ export default function Signup() {
         })
     }
 
-    // async function createNewUser(e) {
-    //     console.log('clicked')
-    //     e.preventDefault()
-    //     if (signupData.password !== signupData.passwordConfirm){
-    //         console.log("Passwords do not match")
-    //     }
-    //     try {
-    //         await signup(signupData.username, signupData.password)
-    //         navigate('/')
-    //         console.log(signupData, 'success')
-    //     } 
-    //     catch {setErrors("Failed to create an account")}
-    //     console.log('did it work?')
-    //     setLoggedInState(!loggedInState)
-    // }
-    
     async function createNewUser(e) {
+        console.log('clicked')
+        console.log('data', signupData.username, signupData.password)
         e.preventDefault()
-
-        //check if passwords match
         if (signupData.password !== signupData.passwordConfirm){
-            setErrors("Passwords do not match")
+            console.log("Passwords do not match")
         }
         try {
-            await addDoc(usersCollectionRef, {
-                username: signupData.username,
-                password: signupData.password
-            })
+            await signup(auth, signupData.username, signupData.password)
             navigate('/')
+            console.log('newuserData:', signupData)
         } 
         catch {setErrors("Failed to create an account")}
-        //set logged in context to true
+        console.log('did it work?')
         setLoggedInState(!loggedInState)
-        //set currentuser context to data that was just created
-        // setCurrentUser({username: signupData.username, password: signupData.password})
-        console.log(currentUser)
     }
+    
+    // async function createNewUser(e) {
+    //     e.preventDefault()
+
+    //     //check if passwords match
+    //     if (signupData.password !== signupData.passwordConfirm){
+    //         setErrors("Passwords do not match")
+    //     }
+    //     try {
+    //         await addDoc(usersCollectionRef, {
+    //             username: signupData.username,
+    //             password: signupData.password
+    //         })
+    //         navigate('/')
+    //     } 
+    //     catch {setErrors("Failed to create an account")}
+    //     //set logged in context to true
+    //     setLoggedInState(!loggedInState)
+    //     //set currentuser context to data that was just created
+    //     // setCurrentUser({username: signupData.username, password: signupData.password})
+    //     console.log(currentUser)
+    // }
     
 }

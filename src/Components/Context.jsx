@@ -3,7 +3,6 @@ import React, { useState, useEffect, createContext, useContext } from "react";
 import {auth} from '../firebase-config.js'
 
 export const UserContext = createContext()
-
 //redundant?
 export function useAuthContext(){
     return useContext(UserContext)
@@ -15,12 +14,13 @@ export const ContextProvider = (props) => {
         userName: '',
         userId: ''
     })
-    
-    function signup(email, password) {
+    function signup(auth, email, password) {
+        //the consolelog get called but nothing happens after it and I get no response, and nothing hits the backend
         console.log('signupfunction called')
-        return auth.createUserWithEmailandPassword(email, password)
+        auth.createUserWithEmailandPassword(auth, email, password)
+        .then(data=>console.log(data))
+        .catch(error=> console.log(error))
     }
-
     function login(email, password) {
         return auth.signInWithEmailAndPassword(email, password)
     }
@@ -34,7 +34,6 @@ export const ContextProvider = (props) => {
         return currentUser.updatePassword(password)
     }
 
-
     const value= {
         currentUser,
         loggedInState,
@@ -45,7 +44,6 @@ export const ContextProvider = (props) => {
         updateEmail,
         updatePassword
     }
-    
     
     return (
         <UserContext.Provider value={value}>
