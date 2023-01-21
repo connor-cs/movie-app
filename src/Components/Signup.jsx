@@ -11,7 +11,7 @@ import { auth, db } from "../firebase-config";
 export default function Signup() {
     
     const {loggedInState, setLoggedInState}=useContext(UserContext)
-    const {signup, login, setCurrentUser} = useAuthContext()
+    const {signup, login, logout, currentUser, setCurrentUser} = useAuthContext()
     const navigate = useNavigate()
     const [loginData, setLoginData] = useState({
         username: '',
@@ -23,6 +23,7 @@ export default function Signup() {
         passwordConfirm: ''
     })
     const [errors, setErrors] = useState('')
+    
 
     return (
         <div className='form'>
@@ -31,7 +32,6 @@ export default function Signup() {
             <div className='login-form-container form-container'>
                 <form className='login-form'>
                     <input
-                        type='text'
                         value={loginData.username}
                         placeholder='type your username'
                         onChange={handleLoginUsername}>
@@ -73,14 +73,15 @@ export default function Signup() {
                     </form>
                 </div>
             </div>
+            <div>{loggedInState ? <button onClick={logout}>Log out</button> : null}</div>
         </div>
     )
 
     //helper functions
     function handleLoginClick(e){
         e.preventDefault()
-        console.log(loginData)
         login(auth, loginData.username, loginData.password)
+        
     }
 
     function handleLoginUsername(e) {
@@ -124,7 +125,7 @@ export default function Signup() {
         try {
             await signup(auth, signupData.username, signupData.password)
             navigate('/')
-            console.log('newuserData:', signupData)
+            setCurrentUser()
         } 
         catch {
             console.log(errors)

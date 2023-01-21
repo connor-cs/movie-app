@@ -6,6 +6,7 @@ import { updateCurrentUser, StateChanged,
 import React, { useState, useEffect, createContext, useContext } from "react";
 import {auth} from '../firebase-config.js'
 
+
 export const UserContext = createContext()
 //redundant?
 export function useAuthContext(){
@@ -15,10 +16,13 @@ export function useAuthContext(){
 export const ContextProvider = (props) => {
     const [loggedInState, setLoggedInState] = useState(false)
     const [loading, setIsLoading] = useState(false)
+
+    //where should this be updated? in login or in authStateChanged useEffect?
     const [currentUser, setCurrentUser] = useState({
-        userName: '',
+        email: '',
         uid: ''
     })
+    
     function signup(auth, email, password) {
         createUserWithEmailAndPassword(auth, email, password)
         .then(data=>console.log('data',data))
@@ -27,7 +31,8 @@ export const ContextProvider = (props) => {
 
     function login(auth, email, password) {
         signInWithEmailAndPassword(auth, email, password)
-        .then(data=>console.log('res', data))
+        .then(data=>console.log('res', data.user))
+        .then(data=>setCurrentUser({uid:data.user.uid, email: data.user.email}))
         .catch(error=>console.log('error', error))
     }
     function logout() { return auth.signOut()}
@@ -43,17 +48,21 @@ export const ContextProvider = (props) => {
     async function handleAuthStateChanged(user){
         if (!user) {
             clear()
+            setLoggedInState(false)
             return
         }
         setCurrentUser({
-            uid: user.ui,
+            uid: user.uid,
             email: user.email
         })
+        setLoggedInState(true)
+        //below is called 4 times before values are fully updated, why?
+        console.log('user', currentUser)
     }
     
     useEffect(()=>{
-        const unsubscribe = onAuthStateChanged(auth, handleAuthStateChanged)
-        return () => unsubscribe()
+        onAuthStateChanged(auth, handleAuthStateChanged)
+        console.log(loggedInState)
     }, [])
     
     const value= {
