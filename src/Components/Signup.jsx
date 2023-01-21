@@ -1,20 +1,17 @@
 import React, { useState, useContext } from 'react'
+import { EmailAuthProvider} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom'
 import { nanoid } from 'nanoid'
 import { UserContext, useAuthContext } from './Context'
-import { db } from "../firebase-config";
-import {
-    collection,
-    getDocs,
-    addDoc,
-    updateDoc,
-    doc,
-    } from "firebase/firestore";
+import { auth, db } from "../firebase-config";
+
+
+      
 
 export default function Signup() {
-    const usersCollectionRef = collection(db, "users")
-    const {loggedInState, setLoggedInState, currentUser, setCurrentUser}=useContext(UserContext)
-    const {signup, auth} = useAuthContext()
+    
+    const {loggedInState, setLoggedInState}=useContext(UserContext)
+    const {signup, login, setCurrentUser} = useAuthContext()
     const navigate = useNavigate()
     const [loginData, setLoginData] = useState({
         username: '',
@@ -49,6 +46,7 @@ export default function Signup() {
                 </form>
                 
                 {/* signup form */}
+                
                 <span style={{color: "white"}}>Or create account here:</span>
                 {errors ? <p>{errors}</p> : null}
                 <div className="signup-form-container form-container">
@@ -82,6 +80,7 @@ export default function Signup() {
     function handleLoginClick(e){
         e.preventDefault()
         console.log(loginData)
+        login(auth, loginData.username, loginData.password)
     }
 
     function handleLoginUsername(e) {
@@ -90,7 +89,6 @@ export default function Signup() {
             ...loginData,
             username: e.target.value
         })
-        console.log(loginData.username)
     }
     function handleLoginPassword(e) {
         e.preventDefault()
@@ -119,42 +117,20 @@ export default function Signup() {
     }
 
     async function createNewUser(e) {
-        console.log('clicked')
-        console.log('data', signupData.username, signupData.password)
         e.preventDefault()
         if (signupData.password !== signupData.passwordConfirm){
-            console.log("Passwords do not match")
+            alert("Passwords do not match")
         }
         try {
             await signup(auth, signupData.username, signupData.password)
             navigate('/')
             console.log('newuserData:', signupData)
         } 
-        catch {setErrors("Failed to create an account")}
-        console.log('did it work?')
+        catch {
+            console.log(errors)
+            setErrors("Failed to create an account")}
+        
         setLoggedInState(!loggedInState)
     }
-    
-    // async function createNewUser(e) {
-    //     e.preventDefault()
-
-    //     //check if passwords match
-    //     if (signupData.password !== signupData.passwordConfirm){
-    //         setErrors("Passwords do not match")
-    //     }
-    //     try {
-    //         await addDoc(usersCollectionRef, {
-    //             username: signupData.username,
-    //             password: signupData.password
-    //         })
-    //         navigate('/')
-    //     } 
-    //     catch {setErrors("Failed to create an account")}
-    //     //set logged in context to true
-    //     setLoggedInState(!loggedInState)
-    //     //set currentuser context to data that was just created
-    //     // setCurrentUser({username: signupData.username, password: signupData.password})
-    //     console.log(currentUser)
-    // }
     
 }

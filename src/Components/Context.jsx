@@ -1,4 +1,8 @@
-import { updateCurrentUser, StateChanged } from "firebase/auth";
+import { updateCurrentUser, StateChanged, 
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword, 
+    onAuthStateChanged, 
+    EmailAuthProvider } from "firebase/auth";
 import React, { useState, useEffect, createContext, useContext } from "react";
 import {auth} from '../firebase-config.js'
 
@@ -10,33 +14,53 @@ export function useAuthContext(){
 
 export const ContextProvider = (props) => {
     const [loggedInState, setLoggedInState] = useState(false)
+    const [loading, setIsLoading] = useState(false)
     const [currentUser, setCurrentUser] = useState({
         userName: '',
-        userId: ''
+        uid: ''
     })
     function signup(auth, email, password) {
-        //the consolelog get called but nothing happens after it and I get no response, and nothing hits the backend
-        console.log('signupfunction called')
-        auth.createUserWithEmailandPassword(auth, email, password)
-        .then(data=>console.log(data))
-        .catch(error=> console.log(error))
-    }
-    function login(email, password) {
-        return auth.signInWithEmailAndPassword(email, password)
-    }
-    function logout() {
-        return auth.signOut()
-    }
-    function updateEmail(email) {
-        return currentUser.updateEmail(email)
-    }
-    function updatePassword(password) {
-        return currentUser.updatePassword(password)
+        createUserWithEmailAndPassword(auth, email, password)
+        .then(data=>console.log('data',data))
+        .catch(error=> console.log('errors:',error))
     }
 
+    function login(auth, email, password) {
+        signInWithEmailAndPassword(auth, email, password)
+        .then(data=>console.log('res', data))
+        .catch(error=>console.log('error', error))
+    }
+    function logout() { return auth.signOut()}
+    
+    function updateEmail(email) {return currentUser.updateEmail(email)}
+    
+    function updatePassword(password) { return currentUser.updatePassword(password)}
+
+    function clear(){
+        setIsLoading(false)
+        setCurrentUser(null)
+    }
+    async function handleAuthStateChanged(user){
+        if (!user) {
+            clear()
+            return
+        }
+        setCurrentUser({
+            uid: user.ui,
+            email: user.email
+        })
+    }
+    
+    useEffect(()=>{
+        const unsubscribe = onAuthStateChanged(auth, handleAuthStateChanged)
+        return () => unsubscribe()
+    }, [])
+    
     const value= {
         currentUser,
         loggedInState,
+        loading,
+        EmailAuthProvider,
         setLoggedInState,
         login,
         signup,

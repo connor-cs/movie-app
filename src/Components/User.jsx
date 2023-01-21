@@ -26,7 +26,7 @@ export default function User() {
     return (
     <>
         <div user-page-header>
-            <h1>`Welcome ${currentUser.username}`</h1>
+            <h1>`Welcome user`</h1>
             <button>Account actions</button>
         </div>
         <div className="saved-movies-container">

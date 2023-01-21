@@ -41,7 +41,7 @@ export default function Sidebar() {
             icon: <FaInfo />
         },
     ]
-    console.log('loggedinstate',loggedInState)
+    
     return (
         <div className='side-bar-container'>
             <div style={{width: isOpen ? "200px" : "50px"}} className='sidebar'>

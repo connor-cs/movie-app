@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from '@firebase/firestore'
-import {getAuth} from "firebase/auth"
+import { getAuth } from "firebase/auth"
 import "firebase/auth"
 const key = process.env.REACT_APP_FIREBASE_KEY
 
@@ -14,7 +14,6 @@ const firebaseConfig = {
     measurementId: "G-VQ9PM3Y02R"
 };
 
-const app = initializeApp(firebaseConfig)
-//below returns firebase auth object, whatever that is
+export const app = initializeApp(firebaseConfig)
 export const auth = getAuth(app)
 export const db = getFirestore(app)
