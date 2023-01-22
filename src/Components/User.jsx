@@ -9,28 +9,25 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function User() {
-    const { loggedInState, setLoggedInState, currentUser } =
+  const { loggedInState, setLoggedInState, currentUser } =
     useContext(UserContext);
-    const navigate = useNavigate()
-    const {logout}= useAuthContext()
-    const [active, setActive] = useState(false);
-    
-    
-    return (
-    <>
-        <div user-page-header>
-            <h1>Welcome user {currentUser.email}</h1>
-            <button>Account actions</button>
-            <button onClick={handleLogout}>Logout</button>
-        </div>
-        <div className="saved-movies-container">
-        
-        </div>
-    </>
-    );
+  const navigate = useNavigate();
+  const { logout } = useAuthContext();
+  const [active, setActive] = useState(false);
 
-    function handleLogout(){
-        logout()
-        navigate('/')
-    }
+  return (
+    <>
+      <div user-page-header>
+        <h1>Welcome user {currentUser.email}</h1>
+        <button>Account actions</button>
+        <button onClick={handleLogout}>Logout</button>
+      </div>
+      <div className="saved-movies-container"></div>
+    </>
+  );
+
+  function handleLogout() {
+    logout();
+    navigate("/");
+  }
 }

@@ -40,8 +40,8 @@ export default function About() {
 
   //this works fine too
   const updateUserName = async (id, changedUsername) => {
-    console.log(id)
-    console.log('changedName', changedUsername)
+    console.log(id);
+    console.log("changedName", changedUsername);
     //user doc function to select particular document from firestore
     const userDoc = doc(db, "users", id);
     //set updated info in obj
@@ -63,11 +63,15 @@ export default function About() {
             <button onClick={() => setActive(!active)}>change username</button>
             {active ? (
               <div>
-              <input
-                placeholder="type new username"
-                onChange={(e) => setChangedUsername(e.target.value)}
-              />
-              <button onClick={()=>updateUserName(user.id, changedUsername)}>submit</button>
+                <input
+                  placeholder="type new username"
+                  onChange={(e) => setChangedUsername(e.target.value)}
+                />
+                <button
+                  onClick={() => updateUserName(user.id, changedUsername)}
+                >
+                  submit
+                </button>
               </div>
             ) : null}
             <br></br>

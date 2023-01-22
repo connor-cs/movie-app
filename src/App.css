@@ -90,7 +90,7 @@
   grid-template-columns: repeat(4, minmax(100px, 1fr));
 }
 
-.movie-page h1{
+.movie-page h1 {
   color: white;
 }
 
@@ -124,11 +124,11 @@
   outline: none;
 }
 
-.tvshow-page{
+.tvshow-page {
   padding: 10px;
 }
 
-.tvshow-page h1{
+.tvshow-page h1 {
   color: white
 }
 
