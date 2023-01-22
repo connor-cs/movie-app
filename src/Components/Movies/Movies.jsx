@@ -43,7 +43,7 @@ export default function Movies() {
 
         <div className='movie-page'>
 
-            <h1>Movies</h1>
+            <h1>Browse Movies</h1>
 
             <div className='search-bar'>
                 <MdSearch className='search-icon' size="1.3em" />

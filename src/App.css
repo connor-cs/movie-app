@@ -90,6 +90,9 @@
   grid-template-columns: repeat(4, minmax(100px, 1fr));
 }
 
+.movie-page h1{
+  color: white;
+}
 
 .movie-page {
   margin-left: 10px;
@@ -97,7 +100,6 @@
   padding-left: 10px;
   display: flex;
   flex-direction: column;
-  border: solid green;
   background-color: #282c34;
 }
 
@@ -120,6 +122,14 @@
 
 .search-bar input:focus {
   outline: none;
+}
+
+.tvshow-page{
+  padding: 10px;
+}
+
+.tvshow-page h1{
+  color: white
 }
 
 .show-container {
