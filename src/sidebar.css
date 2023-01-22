@@ -27,12 +27,14 @@
 }
 
 .side-bar-container{
+    
     display: inline-block;
     justify-content: space-between;
     box-shadow: 0 5px 10px 0;
 }
 
 .sidebar{
+    /* position: fixed; */
     background: #000;
     color: #fff;
     height: 100vh;

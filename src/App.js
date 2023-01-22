@@ -13,8 +13,8 @@ import Sidebar from './Components/Sidebar';
 
 function App() {
   return (
-    <div className="App">
-      <ContextProvider>
+    <ContextProvider>
+      <div className="App">
         <Sidebar />
         <div className='main'>
           <Routes>
@@ -26,8 +26,8 @@ function App() {
             <Route path='/signup' element={<Signup />}></Route>
           </Routes>
         </div>
-      </ContextProvider>
-    </div>
+      </div>
+    </ContextProvider>
   )
 }
 

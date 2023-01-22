@@ -28,7 +28,7 @@ export default function Signup() {
     return (
         <div className='form'>
             {/* login form */}
-            <span style={{color: "white"}}>Login here:</span>
+            <span>Login here:</span>
             <div className='login-form-container form-container'>
                 <form className='login-form'>
                     <input
@@ -47,7 +47,7 @@ export default function Signup() {
                 
                 {/* signup form */}
                 
-                <span style={{color: "white"}}>Or create account here:</span>
+                <span>Or create account here:</span>
                 {errors ? <p>{errors}</p> : null}
                 <div className="signup-form-container form-container">
                     <form className='signup-form' onSubmit={createNewUser}>

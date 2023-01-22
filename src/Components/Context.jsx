@@ -16,7 +16,7 @@ export function useAuthContext(){
 export const ContextProvider = (props) => {
     const [loggedInState, setLoggedInState] = useState(false)
     const [loading, setIsLoading] = useState(false)
-
+ 
     //where should this be updated? in login or in authStateChanged useEffect?
     const [currentUser, setCurrentUser] = useState({
         email: '',
