@@ -1,19 +1,17 @@
-import React from 'react'
+import React, {useContext, useState} from 'react'
 import '../sidebar.css'
 import { FaBars, FaHome, FaInfo, FaUserAlt } from 'react-icons/fa'
 import { TbMovie, TbDeviceTv } from "react-icons/tb";
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
-import { LoggedInContext } from './Context';
-import { useContext } from 'react';
+import { UserContext } from './Context';
 
 export default function Sidebar() {
-    
-    const {loggedInState} =useContext(LoggedInContext)
+
+    const {loggedInState} =useContext(UserContext)
     const [isOpen, setIsOpen] = useState(true)
     const toggle = () => setIsOpen(!isOpen)
 
-    const navbarItem1 = (loggedInState) ? '/user' : '/signup'
+    const navbarItem1 = (loggedInState) ? '/user/:id' : '/signup'
     const navbarItem2 = (loggedInState) ? 'My Account' : 'Sign in'
 
     const menuItem = [
@@ -43,7 +41,7 @@ export default function Sidebar() {
             icon: <FaInfo />
         },
     ]
-    console.log('loggedinstate',loggedInState)
+    
     return (
         <div className='side-bar-container'>
             <div style={{width: isOpen ? "200px" : "50px"}} className='sidebar'>

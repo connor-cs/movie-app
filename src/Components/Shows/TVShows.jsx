@@ -23,7 +23,8 @@ export default function TVShows() {
 
   //get user search results
   const getSearchResults = async (searchInput) => {
-    console.log(searchInput)
+    // console.log(searchInput)
+    // console.log(`https://api.themoviedb.org/3/search/tv?api_key=${key}&language=en-US&page=1&query=${searchInput}&include_adult=false`)
     const data = await fetch(`https://api.themoviedb.org/3/search/tv?api_key=${key}&language=en-US&page=1&query=${searchInput}&include_adult=false`)
     const json = await data.json()
     setSearchResults(json.results)
@@ -35,7 +36,7 @@ export default function TVShows() {
   }
 
   function renderShowCard(arr) {
-    return arr.map(show => <TVShowCard show={show}/>)
+    return arr.map(show => <TVShowCard shows={show}/>)
   }
 
   return (
@@ -51,7 +52,7 @@ export default function TVShows() {
         </input>
       </div>
       <div className='show-container'>
-        {shows.map(show => <TVShowCard shows={show} />)}
+        {searchResults ? renderShowCard(searchResults) : renderShowCard(shows)}
       </div>
     </div>
   )
