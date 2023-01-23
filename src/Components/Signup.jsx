@@ -116,6 +116,7 @@ export default function Signup() {
     });
   }
 
+  //also add a doc to users collection here or in onauthStateChange inside context? 
   async function createNewUser(e) {
     e.preventDefault();
     if (signupData.password !== signupData.passwordConfirm) {
@@ -124,12 +125,11 @@ export default function Signup() {
     try {
       await signup(auth, signupData.username, signupData.password);
       navigate("/");
-      setCurrentUser();
     } catch {
       console.log(errors);
       setErrors("Failed to create an account");
     }
 
-    setLoggedInState(!loggedInState);
+    setLoggedInState(true);
   }
 }

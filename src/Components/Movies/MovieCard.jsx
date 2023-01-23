@@ -1,11 +1,14 @@
 import React from 'react'
 import { useContext } from 'react'
 import { AiOutlineStar } from 'react-icons/ai'
-import { UserContext } from '../Context'
+import { useAuthContext, UserContext } from '../Context'
 
-export default function MovieCard({ movie }) {
-  const { loggedInState } = useContext(UserContext)
 
+//where to handle state for movie that was clicked? this doesn't seem like the best place
+export default function MovieCard({ movie, handleClick }) {
+  const { loggedInState, currentUser } = useAuthContext()
+
+  //can't put this login into a seperate file because it relies on authContext
   const handleLikeClick = () => {
     if (loggedInState === false) { alert('Must be signed in to add to watchlist!') }
 
@@ -26,7 +29,7 @@ export default function MovieCard({ movie }) {
         <div className='filler-poster'></div>}
       <p>Average score: {movie.vote_average}</p>
       {/* <p>{movie.overview}</p> */}
-      <p>Add to list <AiOutlineStar className='star-icon' onClick={handleLikeClick} /></p>
+      <p>Add to list <AiOutlineStar className='star-icon' onClick={()=>handleClick(movie.id, movie.title, movie.poster_path)} /></p>
     </div>
   )
 }

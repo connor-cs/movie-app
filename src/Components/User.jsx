@@ -17,8 +17,9 @@ export default function User() {
 
   return (
     <>
-      <div user-page-header>
+      <div className="user-page-header">
         <h1>Welcome user {currentUser.email}</h1>
+        <h2>Login state: {loggedInState}</h2>
         <button>Account actions</button>
         <button onClick={handleLogout}>Logout</button>
       </div>
