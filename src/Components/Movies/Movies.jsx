@@ -4,16 +4,10 @@ import MovieCard from "./MovieCard";
 import { MdSearch } from "react-icons/md";
 import { useAuthContext } from "../Context";
 import { db } from "../../firebase-config";
-import {
-  collection,
-  addDoc,
-  setDoc,
-  doc,
-} from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 
 export default function Movies() {
 
-  const usersCollectionRef = collection(db, "users");
   const { currentUser } = useAuthContext();
   const [movies, setMovies] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -54,9 +48,9 @@ export default function Movies() {
     };
     console.log("clickedmovie:", clickedMovie, "currentuser:", currentUser);
     //get reference to collection of movies belonging to currentUser doc:
-    const watchlist = collection(db, `users/${currentUser.uid}/watchlist`)
-    console.log('watchlist:', watchlist)
-    addMovieToWatchlist(clickedMovie, watchlist)
+    // const watchlist = collection(db, `users/${currentUser.uid}/watchlist`)
+    // console.log('watchlist:', watchlist)
+    addMovieToWatchlist(clickedMovie)
   }
 
   console.log("currentuserfrommovies:", currentUser);
@@ -97,8 +91,9 @@ export default function Movies() {
 
   //put this function inside handleMovieClick or inside a useEffect with clickedMovie as dependency?
   //will need to check if it exists first
-  async function addMovieToWatchlist(clickedMovie, watchlistRef){
-    await addDoc(watchlistRef, {
+  async function addMovieToWatchlist(clickedMovie){
+    const movieRef = doc(db, `users/${currentUser.uid}/watchlist`, `${clickedMovie.id}`)
+    await setDoc(movieRef, {
         id: clickedMovie.id,
         title: clickedMovie.title,
         image: clickedMovie.img
@@ -107,5 +102,7 @@ export default function Movies() {
     .catch(error=>console.log('addDoc error:', error))
     
   }
-
+  //to add data using setDoc with custom id:
+  //first arg of setDoc is doc method which takes 3 args: firestore instance, collection name, custom doc id
+  //second arg of setdoc is the data payload, third arg is options
 }
