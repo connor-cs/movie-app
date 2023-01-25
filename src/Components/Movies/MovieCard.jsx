@@ -1,12 +1,12 @@
 import React from 'react'
 import { useContext } from 'react'
 import { AiOutlineStar } from 'react-icons/ai'
-import { useAuthContext, UserContext } from '../Context'
+
 
 
 //where to handle state for movie that was clicked? this doesn't seem like the best place
 export default function MovieCard({ movie, handleClick }) {
-  const { loggedInState, currentUser } = useAuthContext()
+
 
   return (
     <div className='card' key={movie.id}>

@@ -1,6 +1,7 @@
 import React from "react";
+import { AiOutlineStar } from 'react-icons/ai'
 
-export default function TVShowCard({ shows }) {
+export default function TVShowCard({ shows, handleClick }) {
   return (
     <div className="card showCard" key={shows.id}>
       <h3>{shows.name}</h3>
@@ -15,7 +16,7 @@ export default function TVShowCard({ shows }) {
       )}
 
       {/* <p>{show.overview}</p> */}
-      <p>Add to watchlist</p>
+      <p>Add to watchlist <AiOutlineStar className='star-icon' onClick={()=>handleClick(shows.id, shows.name, shows.poster_path)}/></p>
     </div>
   );
 }

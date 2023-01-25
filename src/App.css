@@ -111,6 +111,16 @@
   background-color: #282c34;
 }
 
+.pagination {
+  display:flex;
+  justify-content: center;
+  background-color: lightgray;
+}
+
+.pagination text{
+  color: white
+}
+
 .search-bar {
   border-radius: 10px;
   background-color: lightgray;

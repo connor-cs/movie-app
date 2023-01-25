@@ -1,15 +1,17 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import MovieCard from "./MovieCard";
+import React, { useEffect, useState } from "react";
 import { MdSearch } from "react-icons/md";
 import { useAuthContext } from "../Context";
 import { db } from "../../firebase-config";
 import { setDoc, doc } from "firebase/firestore";
+import MovieCard from "./MovieCard";
+import PageComponent from "../Pagination/Pagination";
 
 export default function Movies() {
 
   const { currentUser } = useAuthContext();
   const [movies, setMovies] = useState([]);
+  const [page, setPage] = useState(1)
+  const [numOfPages, setNumOfPages] = useState()
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState();
   const key = process.env.REACT_APP_API_KEY;
@@ -18,13 +20,14 @@ export default function Movies() {
   useEffect(() => {
     const fetchMovie = async () => {
       const movieData = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=en-US&page=1`
+        // `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=en-US&page=1`
+        `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_watch_monetization_types=flatrate`
       );
       const json = await movieData.json();
       setMovies(json.results);
     };
     fetchMovie();
-  }, []);
+  }, [page]);
 
   //this makes api call to get return user's search results
   const getSearchResults = async (searchInput) => {
@@ -53,14 +56,13 @@ export default function Movies() {
     addMovieToWatchlist(clickedMovie)
   }
 
-  console.log("currentuserfrommovies:", currentUser);
+  // console.log("currentuserfrommovies:", currentUser);
   return (
     <div className="movie-page">
-      <h1>Browse Movies</h1>
+      <h1>Browse trending movies</h1>
 
       <div className="search-bar">
         <MdSearch className="search-icon" size="1.3em" />
-
         <input
           className="search-input"
           type="text"
@@ -73,6 +75,9 @@ export default function Movies() {
         {searchResults
           ? renderMovieCard(searchResults)
           : renderMovieCard(movies)}
+      </div >
+      <div className="pagination">
+        <PageComponent setPage={setPage} numOfPages={numOfPages}/>
       </div>
     </div>
   );
@@ -98,8 +103,8 @@ export default function Movies() {
         title: clickedMovie.title,
         poster_path: clickedMovie.img
     })
-    .then(data=>console.log('addDoc resp',data))
-    .catch(error=>console.log('addDoc error:', error))
+    .then(data=>console.log('resp',data))
+    .catch(error=>console.log('error:', error))
     
   }
   //to add data using setDoc with custom id:
