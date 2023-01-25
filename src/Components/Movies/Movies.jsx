@@ -5,11 +5,14 @@ import { MdSearch } from "react-icons/md";
 import { useAuthContext } from "../Context";
 import { db } from "../../firebase-config";
 import { setDoc, doc } from "firebase/firestore";
+import PageComponent from "../Pagination/Pagination";
 
 export default function Movies() {
 
   const { currentUser } = useAuthContext();
   const [movies, setMovies] = useState([]);
+  const [page, setPage] = useState(1)
+  const [numOfPages, setNumOfPages] = useState()
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState();
   const key = process.env.REACT_APP_API_KEY;
@@ -18,13 +21,14 @@ export default function Movies() {
   useEffect(() => {
     const fetchMovie = async () => {
       const movieData = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=en-US&page=1`
+        // `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=en-US&page=1`
+        `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_watch_monetization_types=flatrate`
       );
       const json = await movieData.json();
       setMovies(json.results);
     };
     fetchMovie();
-  }, []);
+  }, [page]);
 
   //this makes api call to get return user's search results
   const getSearchResults = async (searchInput) => {
@@ -60,7 +64,6 @@ export default function Movies() {
 
       <div className="search-bar">
         <MdSearch className="search-icon" size="1.3em" />
-
         <input
           className="search-input"
           type="text"
@@ -73,6 +76,9 @@ export default function Movies() {
         {searchResults
           ? renderMovieCard(searchResults)
           : renderMovieCard(movies)}
+      </div >
+      <div className="pagination">
+      <PageComponent setPage={setPage} numOfPages={numOfPages}/>
       </div>
     </div>
   );
