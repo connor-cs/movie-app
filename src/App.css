@@ -69,12 +69,20 @@
 
 .landing-page {
   display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
   justify-content: center;
   align-items: center;
+  background-image: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');
+  background-size: stretch;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .main {
   display: flex;
+  
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -90,7 +98,7 @@
   grid-template-columns: repeat(4, minmax(100px, 1fr));
 }
 
-.movie-page h1{
+.movie-page h1 {
   color: white;
 }
 
@@ -124,11 +132,11 @@
   outline: none;
 }
 
-.tvshow-page{
+.tvshow-page {
   padding: 10px;
 }
 
-.tvshow-page h1{
+.tvshow-page h1 {
   color: white
 }
 
@@ -170,3 +178,11 @@ div .signup-form-container {
   background-color: lightgray;
   border-radius: 10px;
 }
+
+.user-page-header{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+

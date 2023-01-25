@@ -16,7 +16,7 @@ export default function About() {
   const [newUserName, setNewUserName] = useState("");
   const [newPass, setNewPass] = useState("");
 
-  //this works fine
+  //display docs for auth users stored in firestore
   useEffect(() => {
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
@@ -40,8 +40,8 @@ export default function About() {
 
   //this works fine too
   const updateUserName = async (id, changedUsername) => {
-    console.log(id)
-    console.log('changedName', changedUsername)
+    console.log(id);
+    console.log("changedName", changedUsername);
     //user doc function to select particular document from firestore
     const userDoc = doc(db, "users", id);
     //set updated info in obj
@@ -53,28 +53,33 @@ export default function About() {
   return (
     <div style={{ backgroundColor: "white" }}>
       <h1>firebase test page</h1>
+      <h1>users in firestore:</h1>
       <br></br>
       {users.map((user) => {
         return (
           <div key={user.id}>
-            <h1>username: {user.username}</h1>
+            <h1>email: {user.email}</h1>
             <h3>password: {user.password} </h3>
             <h3>userid: {user.id}</h3>
             <button onClick={() => setActive(!active)}>change username</button>
             {active ? (
               <div>
-              <input
-                placeholder="type new username"
-                onChange={(e) => setChangedUsername(e.target.value)}
-              />
-              <button onClick={()=>updateUserName(user.id, changedUsername)}>submit</button>
+                <input
+                  placeholder="type new username"
+                  onChange={(e) => setChangedUsername(e.target.value)}
+                />
+                <button
+                  onClick={() => updateUserName(user.id, changedUsername)}
+                >
+                  submit
+                </button>
               </div>
             ) : null}
             <br></br>
           </div>
         );
       })}
-      <div>
+      {/* <div>
         <h2>test form for creating new user in firebase:</h2>
         <input
           placeholder="username.."
@@ -85,7 +90,7 @@ export default function About() {
           onChange={(e) => setNewPass(e.target.value)}
         />
         <button onClick={createUser}>Create new user</button>
-      </div>
+      </div> */}
     </div>
   );
 }
