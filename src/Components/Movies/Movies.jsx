@@ -59,7 +59,7 @@ export default function Movies() {
   // console.log("currentuserfrommovies:", currentUser);
   return (
     <div className="movie-page">
-      <h1>Browse Movies</h1>
+      <h1>Browse trending movies</h1>
 
       <div className="search-bar">
         <MdSearch className="search-icon" size="1.3em" />
@@ -77,7 +77,7 @@ export default function Movies() {
           : renderMovieCard(movies)}
       </div >
       <div className="pagination">
-      <PageComponent setPage={setPage} numOfPages={numOfPages}/>
+        <PageComponent setPage={setPage} numOfPages={numOfPages}/>
       </div>
     </div>
   );
