@@ -8,6 +8,7 @@ import User from "./Components/User";
 import Signup from "./Components/Signup";
 import About from "./Components/About";
 import Sidebar from "./Components/Sidebar";
+import AccountActions from "./Components/AccountActions";
 
 function App() {
   return (
@@ -20,8 +21,9 @@ function App() {
             <Route path="/about" element={<About />}></Route>
             <Route path="/shows" element={<TVShows />}></Route>
             <Route path="/movies" element={<Movies />}></Route>
-            <Route path="/user/:id" element={<User />}></Route>
+            <Route path="/user" element={<User />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
+            <Route path="/account" element={<AccountActions />}></Route>
           </Routes>
         </div>
       </div>

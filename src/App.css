@@ -178,3 +178,11 @@ div .signup-form-container {
   background-color: lightgray;
   border-radius: 10px;
 }
+
+.user-page-header{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+

@@ -7,8 +7,7 @@ import { auth, db } from "../firebase-config";
 
 export default function Signup() {
   const { loggedInState, setLoggedInState } = useContext(UserContext);
-  const { signup, login, logout, currentUser, setCurrentUser } =
-    useAuthContext();
+  const { signup, login, logout} = useAuthContext();
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
     username: "",
@@ -21,6 +20,8 @@ export default function Signup() {
   });
   const [errors, setErrors] = useState("");
 
+  //it's actually an email address that is used to sign up/in but it is still labeled as 'username' here
+  
   return (
     <div className="form">
       {/* login form */}
@@ -29,7 +30,7 @@ export default function Signup() {
         <form className="login-form">
           <input
             value={loginData.username}
-            placeholder="type your username"
+            placeholder="type your email"
             onChange={handleLoginUsername}
           ></input>
           <input
@@ -50,7 +51,7 @@ export default function Signup() {
         <div className="signup-form-container form-container">
           <form className="signup-form" onSubmit={createNewUser}>
             <input
-              placeholder="type username"
+              placeholder="type email"
               type="text"
               value={signupData.username}
               onChange={handleSignupUsername}
@@ -81,6 +82,7 @@ export default function Signup() {
   function handleLoginClick(e) {
     e.preventDefault();
     login(auth, loginData.username, loginData.password);
+    navigate("/")
   }
 
   function handleLoginUsername(e) {

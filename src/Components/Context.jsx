@@ -1,17 +1,16 @@
 import {
   updateCurrentUser,
   StateChanged,
+  deleteUser,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   EmailAuthProvider,
 } from "firebase/auth";
 import { db } from "../firebase-config.js";
-import { addDoc, doc, collection, setDoc } from "firebase/firestore";
+import { deleteDoc, doc, collection, setDoc } from "firebase/firestore";
 import React, { useState, useEffect, createContext, useContext } from "react";
 import { auth } from "../firebase-config.js";
-
-
 
 export const UserContext = createContext();
 export function useAuthContext() { return useContext(UserContext); }
@@ -42,6 +41,15 @@ export const ContextProvider = (props) => {
   
   function logout() { return auth.signOut(); }
 
+  //make this whole function async that is called from account actions page? or just make part of it async
+  function deleteAccount(){
+    //delete user doc from firestore, then delete the actual user from auth
+    deleteDoc(doc(db, `users/${currentUser.uid}`))
+    deleteUser(currentUser)
+      .then(x=>console.log(x))
+      .catch(e=>console.log(e))
+  }
+
   function updateEmail(email) { return currentUser.updateEmail(email); }
 
   function updatePassword(password) { return currentUser.updatePassword(password); }
@@ -53,10 +61,10 @@ export const ContextProvider = (props) => {
 
   //check if user doc exists in firestore and create one if not with setDoc
   //take in the currentUsers data from state
-  //would be nice to make the userId also the doc id instead of the auto generated id
+  //make the userId also the doc id instead of the auto generated id ??
    async function addUserDoc(id, email) {
     //find doc in db to see if it exists
-    const userRef = doc(db, "users", id)
+    const userRef = doc(db, `users/${id}`, id)
     console.log('userref:', userRef)
     const payload = {uid: id, email: email}
     //setDoc params: reference to document to write, the data itself, and options
@@ -83,10 +91,6 @@ export const ContextProvider = (props) => {
       email: user.email,
     });
     setLoggedInState(true);
-    // addDoc(usersCollectionRef, {
-    //     uid: currentUser.uid,
-    //     email: currentUser.email
-    // })
     //is this the right place for this addUserDoc function?
     addUserDoc(currentUser.uid, currentUser.email)
     //below consolelog is called 3 times before values are fully updated. why? something related to being async?
@@ -98,7 +102,6 @@ export const ContextProvider = (props) => {
     onAuthStateChanged(auth, handleAuthStateChanged);
     addUserDoc(currentUser.uid, currentUser.email)
     //this function doesn't seem to be called at all, can't tell
-    // addUserDoc(currentUser.uid, currentUser.email)
   }, []);
 
   const value = {
@@ -112,6 +115,7 @@ export const ContextProvider = (props) => {
     logout,
     updateEmail,
     updatePassword,
+    deleteAccount
   };
 
   return (

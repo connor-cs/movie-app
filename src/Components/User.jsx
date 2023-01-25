@@ -21,18 +21,20 @@ export default function User() {
     getWatchlist();
   }, []);
 
-  console.log('watchlist:', watchlist)
+
   return (
-    <>
+    <div className='user-page'>
       <div className="user-page-header">
         <h1>Welcome user {currentUser.email}</h1>
-        <button>Account actions</button>
+        <button onClick={()=>navigate("/account")}>Account actions</button>
+      
         <button onClick={handleLogout}>Logout</button>
       </div>
-      <div className="saved-movies-container">
+      <h2>Your watchlist:</h2>
+      <div className="watchlist-container">
         {watchlist ? watchlist.map(item => <MovieCard movie={item}/>) : null}
       </div>
-    </>
+    </div>
   );
 
   function handleLogout() {

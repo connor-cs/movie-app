@@ -8,18 +8,6 @@ import { useAuthContext, UserContext } from '../Context'
 export default function MovieCard({ movie, handleClick }) {
   const { loggedInState, currentUser } = useAuthContext()
 
-  //can't put this login into a seperate file because it relies on authContext
-  const handleLikeClick = () => {
-    if (loggedInState === false) { alert('Must be signed in to add to watchlist!') }
-
-    const clickedMovie = {
-      id: movie.id,
-      title: movie.title,
-      img: movie.poster_path,
-    }
-    console.log(clickedMovie)
-  }
-
   return (
     <div className='card' key={movie.id}>
       <h3>{movie.title}</h3>

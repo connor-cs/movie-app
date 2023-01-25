@@ -96,7 +96,7 @@ export default function Movies() {
     await setDoc(movieRef, {
         id: clickedMovie.id,
         title: clickedMovie.title,
-        image: clickedMovie.img
+        poster_path: clickedMovie.img
     })
     .then(data=>console.log('addDoc resp',data))
     .catch(error=>console.log('addDoc error:', error))
