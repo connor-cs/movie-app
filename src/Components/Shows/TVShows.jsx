@@ -1,10 +1,13 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TVShowCard from "./TVShowCard";
 import { MdSearch } from "react-icons/md";
+import { db } from "../../firebase-config";
+import { setDoc, doc } from "firebase/firestore";
+import { useAuthContext } from "../Context";
 
 export default function TVShows() {
+
+  const {currentUser} = useAuthContext()
   const [shows, setShows] = useState([]);
   const [searchResults, setSearchResults] = useState();
   const [searchInput, setSearchInput] = useState("");
@@ -31,15 +34,6 @@ export default function TVShows() {
     setSearchResults(json.results);
   };
 
-  function handleSearchInput(e) {
-    setSearchInput(e.target.value);
-    getSearchResults(searchInput);
-  }
-
-  function renderShowCard(arr) {
-    return arr.map((show) => <TVShowCard shows={show} />);
-  }
-
   return (
     <div className="tvshow-page">
       <h1>Browse shows</h1>
@@ -57,4 +51,30 @@ export default function TVShows() {
       </div>
     </div>
   );
+
+  function handleShowClick(id, name, image) {
+    const clickedShow ={
+      id: id,
+      title: name,
+      poster_path: image
+    }
+    console.log('clicked show:', clickedShow)
+    addShowToWatchList(clickedShow)
+  }
+
+  function handleSearchInput(e) {
+    setSearchInput(e.target.value);
+    getSearchResults(searchInput);
+  }
+
+  function renderShowCard(arr) {
+    return arr.map((show) => <TVShowCard shows={show} handleClick={handleShowClick}/>);
+  }
+  
+  async function addShowToWatchList(clickedShow){
+    const showRef = doc(db, `users/${currentUser.uid}/watchlist`, `${clickedShow.id}`)
+    await setDoc(showRef, clickedShow)
+      .then(data=>console.log('addShow response:', data))
+      .catch(e=>console.log(e))
+  }
 }

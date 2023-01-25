@@ -1,10 +1,9 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import MovieCard from "./MovieCard";
+import React, { useEffect, useState } from "react";
 import { MdSearch } from "react-icons/md";
 import { useAuthContext } from "../Context";
 import { db } from "../../firebase-config";
 import { setDoc, doc } from "firebase/firestore";
+import MovieCard from "./MovieCard";
 import PageComponent from "../Pagination/Pagination";
 
 export default function Movies() {
@@ -57,7 +56,7 @@ export default function Movies() {
     addMovieToWatchlist(clickedMovie)
   }
 
-  console.log("currentuserfrommovies:", currentUser);
+  // console.log("currentuserfrommovies:", currentUser);
   return (
     <div className="movie-page">
       <h1>Browse Movies</h1>
@@ -104,8 +103,8 @@ export default function Movies() {
         title: clickedMovie.title,
         poster_path: clickedMovie.img
     })
-    .then(data=>console.log('addDoc resp',data))
-    .catch(error=>console.log('addDoc error:', error))
+    .then(data=>console.log('resp',data))
+    .catch(error=>console.log('error:', error))
     
   }
   //to add data using setDoc with custom id:
