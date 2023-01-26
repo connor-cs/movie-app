@@ -5,7 +5,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { db } from "../firebase-config.js";
-import { deleteDoc, doc, collection, setDoc } from "firebase/firestore";
+import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import React, { useState, useEffect, createContext, useContext } from "react";
 import { auth } from "../firebase-config.js";
 
@@ -15,7 +15,6 @@ export function useAuthContext() { return useContext(UserContext); }
 export const ContextProvider = (props) => {
   const [loggedInState, setLoggedInState] = useState(false);
   const [loading, setIsLoading] = useState(false);
-  //where should this be updated? in login or in authStateChanged useEffect?
   const [currentUser, setCurrentUser] = useState({
     email: "",
     uid: "",
@@ -25,11 +24,7 @@ export const ContextProvider = (props) => {
     onAuthStateChanged(auth, handleAuthStateChanged);
   }, []);
 
-  //this function is the callback passed to onAuthStateChange in the useEffect below
-  //if no user, updates currentUser state to null (not sure if this is actually necessary, this might already be built in)
-  //otherwise, it sets logged in user to state, and creates a user doc in firestore to represent the auth user
-  //check if that doc exists first
-  //but where should the adUserDoc function go? inside the callback or outside of it but still in useEffect, or somewhere else
+  //callback passed to onAuthStateChanged
   async function handleAuthStateChanged(user) {
     if (!user) {
       clear();
@@ -42,6 +37,16 @@ export const ContextProvider = (props) => {
     });
     setLoggedInState(true);
     addUserDoc(currentUser.uid, currentUser.email)
+    //addUserDoc(user.uid, currentUser.email)
+  }
+
+  //adds doc to firestore to represent new user
+  async function addUserDoc(id, email) {
+    const userRef = doc(db, `users/${id}`)
+    const payload = {uid: id, email: email}
+    await setDoc(userRef, payload, {merge:true})
+        .then(res=>console.log(res))
+        .catch(error=>console.log(error))
   }
 
   function signup(auth, email, password) {
@@ -61,7 +66,6 @@ export const ContextProvider = (props) => {
 
   //make this whole function async that is called from account actions page? or just make part of it async
   function deleteAccount(){
-    //delete user doc from firestore, then delete the actual user from auth
     deleteDoc(doc(db, `users/${currentUser.uid}`))
     deleteUser(currentUser)
       .then(x=>console.log(x))
@@ -76,22 +80,6 @@ export const ContextProvider = (props) => {
     setIsLoading(false);
     setCurrentUser(null);
   }
-
-  //check if user doc exists in firestore and create one if not with setDoc
-  //take in the currentUsers data from state
-  //make the userId also the doc id instead of the auto generated id ??
-   async function addUserDoc(id, email) {
-    //find doc in db to see if it exists:
-    const userRef = doc(db, `users/${id}`, id)
-    console.log('userref:', userRef)
-    const payload = {uid: id, email: email}
-    //setDoc params: reference to document to write, the data itself, and options
-    await setDoc(userRef, payload, {merge:true})
-    //getting no response from this
-        .then(res=>console.log(res))
-        .catch(error=>console.log(error))
-  }
-
 
   const value = {
     currentUser,
