@@ -48,6 +48,9 @@
     align-items: center;
     padding: 20px 15px;
 }
+.bars{
+    cursor: pointer;
+}
 
 .top{
     font-size: 25px;

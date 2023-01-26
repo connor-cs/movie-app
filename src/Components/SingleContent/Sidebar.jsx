@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import "../sidebar.css";
+import "./sidebar.css";
 import { FaBars, FaHome, FaInfo, FaUserAlt } from "react-icons/fa";
 import { TbMovie, TbDeviceTv } from "react-icons/tb";
 import { NavLink } from "react-router-dom";
-import { UserContext } from "./Context";
+import { UserContext } from "../Context";
 
 export default function Sidebar() {
   const { loggedInState } = useContext(UserContext);

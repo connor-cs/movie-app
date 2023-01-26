@@ -39,23 +39,6 @@ export default function Movies() {
     setSearchResults(json.results);
   };
 
-  //takes in clicked movie and currentUser data
-  //finds watchlist collection belonging to currentUser
-  //adds clicked movie doc to collection
-  //should I set this clickedMovie to state?
-  function handleMovieClick(id, title, image) {
-    const clickedMovie = {
-      id: id,
-      title: title,
-      img: image,
-    };
-    console.log("clickedmovie:", clickedMovie, "currentuser:", currentUser);
-    //get reference to collection of movies belonging to currentUser doc:
-    // const watchlist = collection(db, `users/${currentUser.uid}/watchlist`)
-    // console.log('watchlist:', watchlist)
-    addMovieToWatchlist(clickedMovie)
-  }
-
   // console.log("currentuserfrommovies:", currentUser);
   return (
     <div className="movie-page">
@@ -92,6 +75,19 @@ export default function Movies() {
   function handleSearchInput(e) {
     setSearchInput(e.target.value);
     getSearchResults(searchInput);
+  }
+
+  function handleMovieClick(id, title, image) {
+    const clickedMovie = {
+      id: id,
+      title: title,
+      img: image,
+    };
+    console.log("clickedmovie:", clickedMovie, "currentuser:", currentUser);
+    //get reference to collection of movies belonging to currentUser doc:
+    // const watchlist = collection(db, `users/${currentUser.uid}/watchlist`)
+    // console.log('watchlist:', watchlist)
+    addMovieToWatchlist(clickedMovie)
   }
 
   //put this function inside handleMovieClick or inside a useEffect with clickedMovie as dependency?
