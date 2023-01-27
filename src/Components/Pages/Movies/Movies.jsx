@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { MdSearch } from "react-icons/md";
-import { useAuthContext } from "../Context";
-import { db } from "../../firebase-config";
+import { useAuthContext } from "./../../Context";
+import { db } from "../../../firebase-config";
 import { setDoc, doc } from "firebase/firestore";
 import MovieCard from "./MovieCard";
-import PageComponent from "../Pagination/Pagination";
+import PageComponent from "../../Pagination/Pagination";
 
 export default function Movies() {
 

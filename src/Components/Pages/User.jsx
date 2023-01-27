@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useAuthContext, UserContext } from "./Context";
-import { db } from "../firebase-config";
+import { useAuthContext, UserContext } from "../Context";
+import { db } from "../../firebase-config";
 import { doc, collection, getDocs, deleteDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import WatchlistCard from "./SingleContent/WatchlistCard";
+import WatchlistCard from "../SingleContent/WatchlistCard";
 
 export default function User() {
   const { currentUser } = useContext(UserContext);

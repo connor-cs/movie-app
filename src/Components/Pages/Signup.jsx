@@ -1,9 +1,7 @@
 import React, { useState, useContext } from "react";
-import { EmailAuthProvider } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { nanoid } from "nanoid";
-import { UserContext, useAuthContext } from "./Context";
-import { auth, db } from "../firebase-config";
+import { UserContext, useAuthContext } from "../Context";
+import { auth } from "../../firebase-config";
 
 export default function Signup() {
   const { loggedInState, setLoggedInState } = useContext(UserContext);
@@ -20,8 +18,6 @@ export default function Signup() {
   });
   const [errors, setErrors] = useState("");
 
-  //it's actually an email address that is used to sign up/in but it is still labeled as 'username' here
-  
   return (
     <div className="form">
       {/* login form */}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "./Context";
+import { useAuthContext } from "../Context";
 
 export default function AccountActions() {
   const navigate=useNavigate()

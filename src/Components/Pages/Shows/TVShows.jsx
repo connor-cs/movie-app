@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { MdSearch } from "react-icons/md";
-import { db } from "../../firebase-config";
+import { db } from "../../../firebase-config";
 import { setDoc, doc } from "firebase/firestore";
-import { useAuthContext } from "../Context";
+import { useAuthContext } from "../../Context";
 import TVShowCard from "./TVShowCard";
-import PageComponent from "../Pagination/Pagination";
+import PageComponent from "../../Pagination/Pagination";
 
 export default function TVShows() {
 
@@ -20,7 +20,6 @@ export default function TVShows() {
   useEffect(() => {
     const fetchShows = async () => {
       const showData = await fetch(
-        // `https://api.themoviedb.org/3/tv/top_rated?api_key=${key}&language=en-US&page=1`
         `https://api.themoviedb.org/3/discover/tv?api_key=${key}&language=en-US&sort_by=popularity.desc&page=${page}&timezone=America%2FNew_York&include_null_first_air_dates=false&with_watch_monetization_types=flatrate&with_status=0&with_type=0`
       );
       const json = await showData.json();

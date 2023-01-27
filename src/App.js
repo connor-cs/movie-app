@@ -1,14 +1,14 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { ContextProvider } from "./Components/Context";
-import LandingPage from "./Components/LandingPage";
-import TVShows from "./Components/Shows/TVShows";
-import Movies from "./Components/Movies/Movies";
-import User from "./Components/User";
-import Signup from "./Components/Signup";
-import About from "./Components/About";
+import LandingPage from "./Components/Pages/LandingPage";
+import TVShows from "./Components/Pages/Shows/TVShows";
+import Movies from "./Components/Pages/Movies/Movies";
+import User from "./Components/Pages/User";
+import Signup from "./Components/Pages/Signup";
+import About from "./Components/Pages/About";
 import Sidebar from "./Components/SingleContent/Sidebar";
-import AccountActions from "./Components/AccountActions";
+import AccountActions from "./Components/Pages/AccountActions";
 
 function App() {
   return (
