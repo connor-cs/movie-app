@@ -9,10 +9,11 @@
   font-family: 'Roboto', sans-serif;
 }
 
-/* div .App{
-  display: flex;
-  flex-direction: row;
-} */
+.about-container{
+  background-color: lightgrey;
+  padding: 15px;
+  border-radius: 10px;
+}
 
 .App-header {
   background-color: #282c34;
@@ -39,7 +40,8 @@
 
 .card {
   border: 1px solid black;
-  background-color: lightgray;
+  background-color: rgb(54, 51, 51);
+  color: white;
   width: fit-content;
   border-radius: 5px;
   margin: 10px;
@@ -48,7 +50,8 @@
 }
 
 .card:hover {
-  transform: scale(1.3em)
+  background-color: white;
+  color: black;
 }
 
 
@@ -88,6 +91,10 @@
   width: 100%;
 }
 
+.modal{
+  z-index: 2;
+}
+
 .movie-container {
   align-items: center;
   background-color: #282c34;
@@ -120,6 +127,11 @@
 .pagination text{
   color: white
 }
+
+/* .poster{
+  padding:5px;
+  border-radius: 10px;
+} */
 
 .search-bar {
   border-radius: 10px;
@@ -194,5 +206,12 @@ div .signup-form-container {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.watchlist-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 

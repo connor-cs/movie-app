@@ -34,7 +34,7 @@
 }
 
 .sidebar{
-    /* position: fixed; */
+    /* position: sticky; */
     background: #000;
     color: #fff;
     height: 100vh;
