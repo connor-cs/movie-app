@@ -39,7 +39,6 @@ export default function Movies() {
     setSearchResults(json.results);
   };
 
-  // console.log("currentuserfrommovies:", currentUser);
   return (
     <div className="movie-page">
       <h1>Browse trending movies</h1>
@@ -67,7 +66,7 @@ export default function Movies() {
 
   function renderMovieCard(arr) {
     return arr.map((movie) => (
-      <MovieCard movie={movie} handleClick={handleMovieClick} />
+      <MovieCard movie={movie} handleClick={handleMovieClick} movieCardClick={movieCardClick}/>
     ));
   }
   
@@ -84,14 +83,10 @@ export default function Movies() {
       img: image,
     };
     console.log("clickedmovie:", clickedMovie, "currentuser:", currentUser);
-    //get reference to collection of movies belonging to currentUser doc:
-    // const watchlist = collection(db, `users/${currentUser.uid}/watchlist`)
-    // console.log('watchlist:', watchlist)
     addMovieToWatchlist(clickedMovie)
   }
 
-  //put this function inside handleMovieClick or inside a useEffect with clickedMovie as dependency?
-  //will need to check if it exists first
+  //creates Firestore doc in currentUser watchlist
   async function addMovieToWatchlist(clickedMovie){
     const movieRef = doc(db, `users/${currentUser.uid}/watchlist`, `${clickedMovie.id}`)
     await setDoc(movieRef, {
@@ -101,9 +96,10 @@ export default function Movies() {
     })
     .then(data=>console.log('resp',data))
     .catch(error=>console.log('error:', error))
-    
   }
-  //to add data using setDoc with custom id:
-  //first arg of setDoc is doc method which takes 3 args: firestore instance, collection name, custom doc id
-  //second arg of setdoc is the data payload, third arg is options
+ 
+  //logs movie card that was clicked
+  function movieCardClick(movie){
+    console.log('clicked movie:', movie)
+  }
 }

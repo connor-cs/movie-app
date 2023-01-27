@@ -1,10 +1,9 @@
 import React from "react";
 import { AiOutlineStar } from 'react-icons/ai'
 
-export default function TVShowCard({ shows, handleClick }) {
+export default function TVShowCard({ shows, handleClick, showCardClick }) {
   return (
-    <div className="card showCard" key={shows.id}>
-      
+    <div className="card showCard" onClick={()=>showCardClick(shows)}key={shows.id}>
       {shows.poster_path ? (
         <img
           className="poster"

@@ -9,7 +9,6 @@ export default function User() {
   const { currentUser } = useContext(UserContext);
   const navigate = useNavigate();
   const { logout } = useAuthContext();
-  const [active, setActive] = useState(false);
   const [watchlist, setWatchlist] = useState([]);
 
   useEffect(() => {

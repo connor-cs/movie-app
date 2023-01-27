@@ -58,6 +58,7 @@ export default function TVShows() {
     </div>
   );
 
+  //hande adding to watchlist
   function handleShowClick(id, name, image) {
     const clickedShow ={
       id: id,
@@ -74,7 +75,7 @@ export default function TVShows() {
   }
 
   function renderShowCard(arr) {
-    return arr.map((show) => <TVShowCard shows={show} handleClick={handleShowClick}/>);
+    return arr.map((show) => <TVShowCard shows={show} handleClick={handleShowClick} showCardClick={showCardClick}/>);
   }
   
   async function addShowToWatchList(clickedShow){
@@ -82,5 +83,10 @@ export default function TVShows() {
     await setDoc(showRef, clickedShow)
       .then(data=>console.log('addShow response:', data))
       .catch(e=>console.log(e))
+  }
+
+  //show card that was clicked
+  function showCardClick(card){
+    console.log(card)
   }
 }
