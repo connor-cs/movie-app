@@ -5,7 +5,7 @@ import "firebase/auth";
 const key = process.env.REACT_APP_FIREBASE_KEY;
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB6hCYNozj1V5xh7SBPL4fEFPlPjlKhpXE",
+  apiKey: key,
   authDomain: "movie-app-2c8c9.firebaseapp.com",
   projectId: "movie-app-2c8c9",
   storageBucket: "movie-app-2c8c9.appspot.com",
