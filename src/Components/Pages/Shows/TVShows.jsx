@@ -36,6 +36,7 @@ export default function TVShows() {
       `https://api.themoviedb.org/3/search/tv?api_key=${key}&language=en-US&page=1&query=${searchInput}&include_adult=false`
     );
     const json = await data.json();
+    console.log('testsetsteste', json)
     setSearchResults(json.results);
   };
 
@@ -109,6 +110,6 @@ export default function TVShows() {
   function showCardClick(card) {
     setModalContent(card);
     setDisplayModal(true);
-    console.log(card);
+    // console.log('clicked card:', card);
   }
 }
