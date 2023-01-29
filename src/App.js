@@ -7,7 +7,7 @@ import Movies from "./Components/Pages/Movies/Movies";
 import User from "./Components/Pages/User";
 import Signup from "./Components/Pages/Signup";
 import About from "./Components/Pages/About";
-import Sidebar from "./Components/SingleContent/Sidebar";
+import Sidebar from "./Components/SingleContent/Sidebar/Sidebar";
 import AccountActions from "./Components/Pages/AccountActions";
 
 function App() {

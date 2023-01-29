@@ -5,13 +5,15 @@ import { setDoc, doc } from "firebase/firestore";
 import { useAuthContext } from "../../Context";
 import TVShowCard from "./TVShowCard";
 import PageComponent from "../../Pagination/Pagination";
+import ContentModal from "../../SingleContent/Modal";
 
 export default function TVShows() {
-
-  const {currentUser} = useAuthContext()
+  const { currentUser } = useAuthContext();
+  const [displayModal, setDisplayModal] = useState(false);
+  const [modalContent, setModalContent] = useState();
   const [shows, setShows] = useState([]);
-  const [page, setPage]= useState(1)
-  const [numOfPages, setNumOfPages] = useState()
+  const [page, setPage] = useState(1);
+  const [numOfPages, setNumOfPages] = useState();
   const [searchResults, setSearchResults] = useState();
   const [searchInput, setSearchInput] = useState("");
   const key = process.env.REACT_APP_API_KEY;
@@ -34,9 +36,11 @@ export default function TVShows() {
       `https://api.themoviedb.org/3/search/tv?api_key=${key}&language=en-US&page=1&query=${searchInput}&include_adult=false`
     );
     const json = await data.json();
+    console.log('testsetsteste', json)
     setSearchResults(json.results);
   };
 
+  //where to display modal component?
   return (
     <div className="tvshow-page">
       <h1>Browse trending shows</h1>
@@ -50,6 +54,13 @@ export default function TVShows() {
         ></input>
       </div>
       <div className="show-container">
+        {displayModal ? (
+          <ContentModal
+            content={modalContent}
+            displayModal={displayModal}
+            setDisplayModal={setDisplayModal}
+          />
+        ) : null}
         {searchResults ? renderShowCard(searchResults) : renderShowCard(shows)}
       </div>
       <div className="pagination">
@@ -60,13 +71,13 @@ export default function TVShows() {
 
   //hande adding to watchlist
   function handleShowClick(id, name, image) {
-    const clickedShow ={
+    const clickedShow = {
       id: id,
       title: name,
-      poster_path: image
-    }
-    console.log('clicked show:', clickedShow)
-    addShowToWatchList(clickedShow)
+      poster_path: image,
+    };
+    console.log("clicked show:", clickedShow);
+    addShowToWatchList(clickedShow);
   }
 
   function handleSearchInput(e) {
@@ -75,18 +86,30 @@ export default function TVShows() {
   }
 
   function renderShowCard(arr) {
-    return arr.map((show) => <TVShowCard shows={show} handleClick={handleShowClick} showCardClick={showCardClick}/>);
+    return arr.map((show) => (
+      <TVShowCard
+        shows={show}
+        handleClick={handleShowClick}
+        showCardClick={showCardClick}
+      />
+    ));
   }
-  
-  async function addShowToWatchList(clickedShow){
-    const showRef = doc(db, `users/${currentUser.uid}/watchlist`, `${clickedShow.id}`)
+
+  async function addShowToWatchList(clickedShow) {
+    const showRef = doc(
+      db,
+      `users/${currentUser.uid}/watchlist`,
+      `${clickedShow.id}`
+    );
     await setDoc(showRef, clickedShow)
-      .then(data=>console.log('addShow response:', data))
-      .catch(e=>console.log(e))
+      .then((data) => console.log("addShow response:", data))
+      .catch((e) => console.log(e));
   }
 
   //show card that was clicked
-  function showCardClick(card){
-    console.log(card)
+  function showCardClick(card) {
+    setModalContent(card);
+    setDisplayModal(true);
+    // console.log('clicked card:', card);
   }
 }
