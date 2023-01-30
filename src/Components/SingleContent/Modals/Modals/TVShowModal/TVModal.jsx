@@ -11,8 +11,6 @@ export default function TVModal({
 }) {
   //ask about callbacks inside event handlers, directly update state or create a handler function to do it like this:
   const handleClose = () => setDisplayModal(false);
-  const key = process.env.REACT_APP_API_KEY;
-  const [modalContent, setModalContent] = useState()
 
   const style = {
     display: "flex",
@@ -28,25 +26,10 @@ export default function TVModal({
     left: '50%'
   };
 
-  // const getData = async () => {
-  //   const data = await fetch(`https://api.themoviedb.org/3/tv/${content}?api_key=${key}&language=en-US`)
-  //   const json = await data.json()
-  //   setModalContent(json)
-  //   //these console logs all work:
-  //   console.log('json:', json)
-  //   console.log('name:', json.name)
-  //   console.log('type:', json.type)
-  //   // but this one is undefined:
-  //   console.log('modalContent:', modalContent)
-  // }
-
-  // useEffect(()=> {
-  //   getData()
-  // }, [])
-
   return (
     <div className="modal">
       <Modal
+      className="modal"
         open={displayModal}
         onClose={() => setDisplayModal(false)}
         BackDropComponent={Backdrop}

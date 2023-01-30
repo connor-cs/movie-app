@@ -1,5 +1,5 @@
 
-## React app built with Firebase Auth and Firestore
+## React app using Firebase Auth and Firestore
 ### Uses Firebase Auth to authenticate and manage users
 ### Allows a user to search for movies and tv shows
 ### Add shows and movies to a watchlist

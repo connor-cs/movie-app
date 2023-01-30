@@ -19,9 +19,13 @@
 .title{
   font-family: 'Roboto', sans-serif;
   color: white;
+  justify-self: flex-end;
+  align-self: flex-end;
 }
 
 .p-tag{
   color: white;
   font-family: 'Roboto', sans-serif;
+  align-self: flex-end;
 }
+
