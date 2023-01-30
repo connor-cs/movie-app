@@ -11,6 +11,8 @@ export default function MovieModal({id, displayModal, setDisplayModal}){
     const data = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${key}&language=en-US`)
     const json = await data.json()
     console.log('json:', json)
+    setMovieDetails(json)
+    console.log('movieDetails:', movieDetails)
   }
 
   useEffect(()=> {
