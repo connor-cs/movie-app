@@ -4,7 +4,7 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import './modal.css'
 
-export default function ContentModal({
+export default function TVModal({
   content,
   displayModal,
   setDisplayModal,

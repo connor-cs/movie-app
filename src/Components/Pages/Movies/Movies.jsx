@@ -119,6 +119,6 @@ export default function Movies() {
   function movieCardClick(movie) {
     setId(movie.id);
     setDisplayModal(true);
-    console.log("clicked movie:", movie);
+    // console.log("clicked movie:", movie);
   }
 }

@@ -5,7 +5,7 @@ import { setDoc, doc } from "firebase/firestore";
 import { useAuthContext } from "../../Context";
 import TVShowCard from "./TVShowCard";
 import PageComponent from "../../Pagination/Pagination";
-import ContentModal from "../../SingleContent/Modal";
+import TVModal from "../../SingleContent/Modals/Modals/TVShowModal/TVModal";
 
 export default function TVShows() {
   const { currentUser } = useAuthContext();
@@ -55,7 +55,7 @@ export default function TVShows() {
       </div>
       <div className="show-container">
         {displayModal ? (
-          <ContentModal
+          <TVModal
             content={modalContent}
             displayModal={displayModal}
             setDisplayModal={setDisplayModal}
