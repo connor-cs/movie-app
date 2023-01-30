@@ -4,14 +4,16 @@ import { useAuthContext } from "./../../Context";
 import { db } from "../../../firebase-config";
 import { setDoc, doc } from "firebase/firestore";
 import MovieCard from "./MovieCard";
+import MovieModal from "../../SingleContent/Modals/Modals/MovieModal/MovieModal";
 import PageComponent from "../../Pagination/Pagination";
 
 export default function Movies() {
-
   const { currentUser } = useAuthContext();
   const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(1)
-  const [numOfPages, setNumOfPages] = useState()
+  const [page, setPage] = useState(1);
+  const [numOfPages, setNumOfPages] = useState();
+  const [displayModal, setDisplayModal] = useState(false);
+  const [id, setId] = useState();
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState();
   const key = process.env.REACT_APP_API_KEY;
@@ -54,22 +56,33 @@ export default function Movies() {
       </div>
 
       <div className="movie-container">
+        {displayModal ? (
+          <MovieModal
+            id={id}
+            displayModal={displayModal}
+            setDisplayModal={setDisplayModal}
+          />
+        ) : null}
         {searchResults
           ? renderMovieCard(searchResults)
           : renderMovieCard(movies)}
-      </div >
+      </div>
       <div className="pagination">
-        <PageComponent setPage={setPage} numOfPages={numOfPages}/>
+        <PageComponent setPage={setPage} numOfPages={numOfPages} />
       </div>
     </div>
   );
 
   function renderMovieCard(arr) {
     return arr.map((movie) => (
-      <MovieCard movie={movie} handleClick={handleMovieClick} movieCardClick={movieCardClick}/>
+      <MovieCard
+        movie={movie}
+        handleClick={handleMovieClick}
+        movieCardClick={movieCardClick}
+      />
     ));
   }
-  
+
   //get user text input and set it to state
   function handleSearchInput(e) {
     setSearchInput(e.target.value);
@@ -83,23 +96,29 @@ export default function Movies() {
       img: image,
     };
     console.log("clickedmovie:", clickedMovie, "currentuser:", currentUser);
-    addMovieToWatchlist(clickedMovie)
+    addMovieToWatchlist(clickedMovie);
   }
 
   //creates Firestore doc in currentUser watchlist
-  async function addMovieToWatchlist(clickedMovie){
-    const movieRef = doc(db, `users/${currentUser.uid}/watchlist`, `${clickedMovie.id}`)
+  async function addMovieToWatchlist(clickedMovie) {
+    const movieRef = doc(
+      db,
+      `users/${currentUser.uid}/watchlist`,
+      `${clickedMovie.id}`
+    );
     await setDoc(movieRef, {
-        id: clickedMovie.id,
-        title: clickedMovie.title,
-        poster_path: clickedMovie.img
+      id: clickedMovie.id,
+      title: clickedMovie.title,
+      poster_path: clickedMovie.img,
     })
-    .then(data=>console.log('resp',data))
-    .catch(error=>console.log('error:', error))
+      .then((data) => console.log("resp", data))
+      .catch((error) => console.log("error:", error));
   }
- 
+
   //logs movie card that was clicked
-  function movieCardClick(movie){
-    console.log('clicked movie:', movie)
+  function movieCardClick(movie) {
+    setId(movie.id);
+    setDisplayModal(true);
+    console.log("clicked movie:", movie);
   }
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal from "@mui/material/Modal";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
-import { useEffect } from "react";
+import './modal.css'
 
 export default function ContentModal({
   content,
@@ -15,9 +15,12 @@ export default function ContentModal({
   const [modalContent, setModalContent] = useState()
 
   const style = {
+    display: "flex",
+    flexDirection: "row",
     position: "absolute",
-    border: "4px solid black",
-    backgroundColor: "white",
+    borderRadius: "10px",
+    backgroundColor: "#39445a",
+    fontFamily: 'Roboto',
     transform: 'translate(-50%, -50%)',
     minWidth: '300px',
     minHeight: '300px',
@@ -50,12 +53,12 @@ export default function ContentModal({
       >
         <Box sx={style}>
           <div>
-            <h3>{content.name}</h3>
-            <img src={`https://image.tmdb.org/t/p/w300${content.poster_path}`} />
+            <h3 className="title">{content.name}</h3>
+            <img className="poster" src={`https://image.tmdb.org/t/p/w300${content.poster_path}`} />
             <div className="show-description">
               <p>{content.overview ? content.overview : "No description available"}</p>
-              <p>First air date: {content.first_air_date}</p>
             </div>
+            <p className="p-tag">First aired: {content.first_air_date}</p>
           </div>
         </Box>
       </Modal>
