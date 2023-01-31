@@ -7,4 +7,29 @@
   background-color: white;
   top: 50%;
   left: 50%;
+  background-color: #39445a;
+  font-family: 'Roboto', sans-serif;
+  color: rgb(223, 222, 222)
+}
+
+.container {
+  display:flex;
+}
+
+.overview{
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px #000000;
+}
+
+.title {
+  font-family: 'Roboto', sans-serif;
+  color: rgb(223, 222, 222)
+}
+
+.tagline{
+  font-style: italic;
+}
+
+.video-button {
+
 }

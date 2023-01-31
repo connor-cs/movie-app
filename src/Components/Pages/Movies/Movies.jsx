@@ -41,6 +41,12 @@ export default function Movies() {
     setSearchResults(json.results);
   };
 
+  //get user text input and set it to state
+  function handleSearchInput(e) {
+    setSearchInput(e.target.value);
+    getSearchResults(searchInput);
+  }
+
   return (
     <div className="movie-page">
       <h1>Browse trending movies</h1>
@@ -83,12 +89,6 @@ export default function Movies() {
     ));
   }
 
-  //get user text input and set it to state
-  function handleSearchInput(e) {
-    setSearchInput(e.target.value);
-    getSearchResults(searchInput);
-  }
-
   function handleMovieClick(id, title, image) {
     const clickedMovie = {
       id: id,
@@ -119,6 +119,6 @@ export default function Movies() {
   function movieCardClick(movie) {
     setId(movie.id);
     setDisplayModal(true);
-    // console.log("clicked movie:", movie);
+    console.log("clicked movie:", movie);
   }
 }
