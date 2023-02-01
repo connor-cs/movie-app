@@ -6,7 +6,7 @@ export default function About() {
   return (
    <div className="about-container">
     <div>
-      <h3>React app built with Firebase Auth and Firestore</h3>
+      <h3>React app using Firebase Auth and Firestore</h3>
       <ul>
         <li>Uses Firebase Auth to authenticate and manage users</li>
         <li>Allows a user to search for movies and tv shows</li>

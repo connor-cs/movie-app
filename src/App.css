@@ -36,6 +36,7 @@
 
 .button-div {
   display: flex;
+  flex-direction: column;
 }
 
 .card {
@@ -83,6 +84,18 @@
   background-repeat: no-repeat;
 }
 
+.landing-page-button {
+  border-radius: 5px;
+  justify-self: center;
+  margin: 5px;
+  padding: 10px;
+}
+
+/* .landing-header {
+  color: rgb(223, 222, 222);
+  padding-bottom: 200px;
+} */
+
 .main {
   display: flex;
   
@@ -121,7 +134,9 @@
 .pagination {
   display:flex;
   justify-content: center;
+  align-items: center;
   background-color: lightgray;
+  margin-bottom: 15px;
 }
 
 .pagination text{

@@ -12,7 +12,7 @@ export default function AccountActions() {
   return (
     <div className="account-actions-page">
       <h1>Account actions</h1>
-      <button onClick={() => setActive(!active)}>Update account info</button>
+      {/* <button onClick={() => setActive(!active)}>Update account info</button>
       {active ? (
         <div className="change-password-input">
           <input
@@ -25,7 +25,7 @@ export default function AccountActions() {
             onChange={(e) => setNewPasswordConfirm(e.target.value)}
           ></input>
         </div>
-      ) : null}
+      ) : null} */}
 
       <button onClick={handleDeleteClick}>Delete your account</button>
     </div>

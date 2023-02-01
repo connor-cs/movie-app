@@ -1,0 +1,55 @@
+.box {
+  display: flex;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  min-width: 300px;
+  min-height: 300px;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  background-color: #39445a;
+  font-family: 'Roboto', sans-serif;
+  color: rgb(223, 222, 222)
+}
+
+.content {
+  display:flex;
+  flex-direction: column;
+}
+
+.overview{
+  border-radius: 10px;
+  align-self: flex-end;
+  padding: 10px;
+  box-shadow: inset 0 0 5px #000000;
+}
+
+.poster {
+  padding: 10px;
+  align-self: flex-start;
+}
+
+.title {
+  font-family: 'Roboto', sans-serif;
+  align-self: flex-end;
+  padding: 10px;
+  color: rgb(223, 222, 222)
+}
+
+.tagline{
+  font-style: italic;
+  align-self: flex-end;
+  padding: 10px;
+}
+
+.video-button {
+  border:none;
+  justify-self: center;
+
+  margin: 5px;
+  padding: 5px;
+  color:rgb(223, 222, 222);
+  background-color: rgb(192, 25, 25);
+  border-radius: 5px;
+}
