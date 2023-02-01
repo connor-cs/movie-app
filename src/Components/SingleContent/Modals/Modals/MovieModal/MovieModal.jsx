@@ -3,7 +3,6 @@ import Modal from "@mui/material/Modal";
 import { BsYoutube} from 'react-icons/bs'
 import Box from "@mui/material/Box";
 import "./movieModalStyles.css";
-import { Navigate, useNavigate } from "react-router-dom";
 
 export default function MovieModal({ id, displayModal, setDisplayModal }) {
   const key = process.env.REACT_APP_API_KEY;
@@ -41,6 +40,7 @@ export default function MovieModal({ id, displayModal, setDisplayModal }) {
           <div className="content">
             <h3 className="title">{movieDetails?.title}</h3>
             <img
+              className="poster"
               src={`https://image.tmdb.org/t/p/w300${movieDetails?.poster_path}`}
               alt="movie poster"
             />

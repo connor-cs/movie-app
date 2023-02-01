@@ -35,7 +35,7 @@ export default function TVModal({
         BackDropComponent={Backdrop}
       >
         <Box sx={style}>
-          <div>
+          <div className="content">
             <h3 className="title">{content.name}</h3>
             <img className="poster" src={`https://image.tmdb.org/t/p/w300${content.poster_path}`} />
             <div className="show-description">
