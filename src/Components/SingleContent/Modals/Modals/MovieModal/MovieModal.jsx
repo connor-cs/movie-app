@@ -3,6 +3,7 @@ import Modal from "@mui/material/Modal";
 import { BsYoutube} from 'react-icons/bs'
 import Box from "@mui/material/Box";
 import "./movieModalStyles.css";
+import Carousel from "../../../Carousel";
 
 export default function MovieModal({ id, displayModal, setDisplayModal }) {
   const key = process.env.REACT_APP_API_KEY;
@@ -22,7 +23,7 @@ export default function MovieModal({ id, displayModal, setDisplayModal }) {
       `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${key}&language=en-US`
     );
     const res = await data.json();
-    console.log(res);
+    // console.log(res);
     setVideo(res.results[0]?.key);
   };
 
@@ -31,7 +32,7 @@ export default function MovieModal({ id, displayModal, setDisplayModal }) {
     getVideo();
   }, []);
 
-  console.log("video:", video);
+  // console.log("video:", video);
 
   return (
     <div className="movie-modal">
@@ -51,6 +52,9 @@ export default function MovieModal({ id, displayModal, setDisplayModal }) {
                   ? movieDetails?.overview
                   : "No description available"}
               </p>
+            </div>
+            <div className="carousel">
+              <Carousel id={id}/>
             </div>
             <button
               className="video-button"
