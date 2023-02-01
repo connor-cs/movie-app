@@ -1,0 +1,20 @@
+.carousel-image {
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  box-shadow: 0px 0px 5px black;
+}
+
+.carousel-item {
+  display: flex;
+  flex-direction: column;
+  object-fit: contain;
+  padding: 10px;
+}
+
+.alice-carousel_stage{
+  border: solid black 3px;
+  object-fit: contain;
+  padding: 10px;
+  margin: 5px;
+}

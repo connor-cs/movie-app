@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
+import { noPicture } from "../../utils/config";
 
 export default function Carousel({ id }) {
-  const [cast, setCast] = useState("");
+  const [cast, setCast] = useState([]);
   const key = process.env.REACT_APP_API_KEY;
 
   const responsive = {
@@ -32,18 +33,23 @@ export default function Carousel({ id }) {
   }, []);
 
   const items = cast.map((person) => {
+    console.log(person.name)
+    return (
     <div className="carousel-item">
       <img
         src={
           person.profile_path
             ? `https://image.tmdb.org/t/p/w300/${person.profile_path}`
-            : null
+            : noPicture
         }
         alt={`${person.name}`}
         className="carousel-image"
       />
-    </div>;
+      <p>{person.name}</p>
+    </div>);
   });
+
+
 
   return (
     <div>

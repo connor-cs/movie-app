@@ -3,7 +3,7 @@ import Modal from "@mui/material/Modal";
 import { BsYoutube} from 'react-icons/bs'
 import Box from "@mui/material/Box";
 import "./movieModalStyles.css";
-import Carousel from "../../../Carousel";
+import Carousel from "../../../Carousel/Carousel";
 
 export default function MovieModal({ id, displayModal, setDisplayModal }) {
   const key = process.env.REACT_APP_API_KEY;
