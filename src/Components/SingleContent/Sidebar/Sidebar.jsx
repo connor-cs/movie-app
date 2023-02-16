@@ -46,7 +46,7 @@ export default function Sidebar() {
       <div style={{ width: isOpen ? "200px" : "50px" }} className="sidebar">
         <div className="top-section">
           <h1 style={{ display: isOpen ? "block" : "none" }} className="top">
-            Top text
+            Movie Hub
           </h1>
           <div style={{ marginLeft: isOpen ? "50px" : "0px" }} className="bars">
             <FaBars onClick={toggle} />
