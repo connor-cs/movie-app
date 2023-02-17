@@ -9,10 +9,9 @@ export default function MovieCard({ movie, handleClick, movieCardClick }) {
         <img src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} alt={`${movie.title} poster`} /> :
         <div className='filler-poster'></div>}
       <h3>{movie.title}</h3>
-      {movie.release_date ? <p>Released: {movie.release_date}</p> : null}
-      {movie.vote_average ? <p>Average score: {movie.vote_average}</p> : null}
-      {/* <p>{movie.overview}</p> */}
-      <p>Add to list <AiOutlineStar className='star-icon' onClick={(e) => {
+      {movie.release_date ? <p><span>Released:</span> {movie.release_date}</p> : null}
+      {movie.vote_average ? <p><span>Average score:</span> {movie.vote_average}</p> : null}
+      <p className='add'>Add to list <AiOutlineStar className='star-icon' onClick={(e) => {
         e.stopPropagation()
         handleClick(movie.id, movie.title, movie.poster_path)
       }

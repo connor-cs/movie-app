@@ -14,9 +14,8 @@ export default function TVShowCard({ shows, handleClick, showCardClick }) {
         <div className="filler-poster"></div>
       )}
     <h3>{shows.name}</h3>
-      <p>First aired: {shows.first_air_date}</p>
-      {/* <p>{show.overview}</p> */}
-      <p>Add to watchlist <AiOutlineStar className='star-icon' onClick={()=>handleClick(shows.id, shows.name, shows.poster_path)}/></p>
+      <p><span>First aired:</span> {shows.first_air_date}</p>
+      <p className="add">Add to watchlist <AiOutlineStar className='star-icon' onClick={()=>handleClick(shows.id, shows.name, shows.poster_path)}/></p>
     </div>
   );
 }

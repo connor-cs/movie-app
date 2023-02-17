@@ -26,6 +26,10 @@
   color: #61dafb;
 }
 
+.add {
+  margin-top: 7px;
+}
+
 .Nav {
   border: 2px solid black;
 }
@@ -45,6 +49,15 @@
   text-align: center;
   box-shadow: 0 3px 10px 0;
   cursor: pointer;
+}
+
+.card span{
+  margin: 5px;
+  font-weight: bold;
+}
+
+.card h3{
+  margin-bottom: 8px;
 }
 
 .card:hover {
