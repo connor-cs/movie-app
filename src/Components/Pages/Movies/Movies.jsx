@@ -41,11 +41,6 @@ export default function Movies() {
     setSearchResults(json.results);
   };
 
-  //get user text input and set it to state
-  function handleSearchInput(e) {
-    setSearchInput(e.target.value);
-    getSearchResults(searchInput);
-  }
 
   return (
     <div className="movie-page">
@@ -78,6 +73,12 @@ export default function Movies() {
       </div>
     </div>
   );
+
+  //get user text input and set it to state
+  function handleSearchInput(e) {
+    setSearchInput(e.target.value);
+    getSearchResults(searchInput);
+  }
 
   function renderMovieCard(arr) {
     return arr.map((movie) => (

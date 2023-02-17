@@ -25,10 +25,10 @@ export default function User() {
     <div className='user-page'>
       <div className="user-page-header">
         <h1>Welcome user {currentUser.email}</h1>
-        <button onClick={()=>navigate("/account")}>Account actions</button>
         <button onClick={handleLogout}>Logout</button>
+        <button onClick={()=>navigate("/account")}>Account actions</button>
+        <h2>Your watchlist:</h2>
       </div>
-      <h2>Your watchlist:</h2>
       <div className="watchlist-container">
         {watchlist ? watchlist.map(item => <WatchlistCard item={item} handleRemoveClick={handleRemoveClick}/>) : null}
       </div>
