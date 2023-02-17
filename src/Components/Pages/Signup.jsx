@@ -42,9 +42,10 @@ export default function Signup() {
 
         {/* signup form */}
 
-        <span>Or create account here:</span>
+        
         {errors ? <p>{errors}</p> : null}
         <div className="signup-form-container form-container">
+        <span>Or create account here:</span>
           <form className="signup-form" onSubmit={createNewUser}>
             <input
               placeholder="type email"
@@ -64,7 +65,7 @@ export default function Signup() {
               value={signupData.passwordConfirm}
               onChange={handleSignupPasswordConfirm}
             ></input>
-            <button>Sign up</button>
+            <button className="signup-button">Sign up</button>
           </form>
         </div>
       </div>

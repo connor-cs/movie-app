@@ -3,7 +3,7 @@ import { AiOutlineStar } from 'react-icons/ai'
 
 export default function TVShowCard({ shows, handleClick, showCardClick }) {
   return (
-    <div className="card showCard" onClick={()=>showCardClick(shows)}key={shows.id}>
+    <div className="card showCard" onClick={() => showCardClick(shows)} key={shows.id}>
       {shows.poster_path ? (
         <img
           className="poster"
@@ -13,10 +13,13 @@ export default function TVShowCard({ shows, handleClick, showCardClick }) {
       ) : (
         <div className="filler-poster"></div>
       )}
-    <h3>{shows.name}</h3>
+      <h3>{shows.name}</h3>
       <p>First aired: {shows.first_air_date}</p>
-      {/* <p>{show.overview}</p> */}
-      <p>Add to watchlist <AiOutlineStar className='star-icon' onClick={()=>handleClick(shows.id, shows.name, shows.poster_path)}/></p>
+      <p>Add to watchlist <AiOutlineStar className='star-icon' onClick={(e) => {
+        e.stopPropagation()
+        handleClick(shows.id, shows.name, shows.poster_path)
+      }
+      } /></p>
     </div>
   );
 }
