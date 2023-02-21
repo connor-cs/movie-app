@@ -133,6 +133,7 @@
   align-items: center;
   width: 100%;
   margin-left: 50px;
+  min-height: 100vh;
 }
 
 .modal {
@@ -211,7 +212,7 @@
 }
 
 .tvshow-page {
-  margin-left: 10px;
+  margin-left: 20px;
   margin-right: 10px;
   padding-left: 10px;
   display: flex;
@@ -228,6 +229,7 @@
 
 .show-container {
   align-items: center;
+  margin-left: 10px;
   background-color: #282c34;
   display: grid;
   flex-wrap: wrap;
