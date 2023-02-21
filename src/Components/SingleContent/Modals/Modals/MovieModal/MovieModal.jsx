@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
-import { BsYoutube} from 'react-icons/bs'
+import { BsYoutube } from "react-icons/bs";
 import Box from "@mui/material/Box";
 import "./movieModalStyles.css";
 
@@ -38,21 +38,22 @@ export default function MovieModal({ id, displayModal, setDisplayModal }) {
       <Modal open={displayModal} onClose={() => setDisplayModal(false)}>
         <Box className="box">
           <div className="content">
-            <h3 className="title">{movieDetails?.title}</h3>
             <img
               className="poster"
               src={`https://image.tmdb.org/t/p/w300${movieDetails?.poster_path}`}
               alt="movie poster"
             />
-            <p className="tagline">{movieDetails?.tagline}</p>
-            <div className="overview">
-              <p>
-                {movieDetails?.overview
-                  ? movieDetails?.overview
-                  : "No description available"}
-              </p>
-            </div>
-            <button
+            <div className="right">
+              <h3 className="title">{movieDetails?.title}</h3>
+              <p className="tagline">{movieDetails?.tagline}</p>
+              <div className="overview">
+                <p>
+                  {movieDetails?.overview
+                    ? movieDetails?.overview
+                    : "No description available"}
+                </p>
+              </div>
+              <button
               className="video-button"
               onClick={() =>
                 window.open(`https://www.youtube.com/watch?v=${video}`)
@@ -60,6 +61,8 @@ export default function MovieModal({ id, displayModal, setDisplayModal }) {
             >
               <BsYoutube /> Watch trailer
             </button>
+            </div>
+            
           </div>
         </Box>
       </Modal>
