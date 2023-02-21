@@ -27,7 +27,7 @@ export default function AccountActions() {
         </div>
       ) : null} */}
 
-      <button onClick={handleDeleteClick}>Delete your account</button>
+      <button className="delete" onClick={handleDeleteClick}>Delete your account</button>
     </div>
   );
 
