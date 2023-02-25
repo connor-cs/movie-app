@@ -4,7 +4,7 @@ import { AiOutlineStar } from 'react-icons/ai'
 export default function MovieCard({ movie, handleClick, movieCardClick }) {
 
   return (
-    <div className='card' onClick={() => movieCardClick(movie)} key={movie.id}>
+    <div className='card movie-card' onClick={() => movieCardClick(movie)} key={movie.id}>
       {movie.poster_path ?
         <img src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} alt={`${movie.title} poster`} /> :
         <div className='filler-poster'></div>}

@@ -33,7 +33,6 @@ export default function Movies() {
 
   //this makes api call to get return user's search results
   const getSearchResults = async (searchInput) => {
-    console.log(searchInput);
     const data = await fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&query=${searchInput}&page=1&include_adult=false`
     );
@@ -91,13 +90,19 @@ export default function Movies() {
   }
 
   function handleMovieClick(id, title, image) {
-    const clickedMovie = {
-      id: id,
-      title: title,
-      img: image,
-    };
-    console.log("clickedmovie:", clickedMovie, "currentuser:", currentUser);
-    addMovieToWatchlist(clickedMovie);
+    if (!currentUser) {
+      alert("Must be signed in to add to watchlist!")
+    }
+    else {
+      const clickedMovie = {
+        id: id,
+        title: title,
+        img: image,
+      };
+      // console.log("clickedmovie:", clickedMovie, "currentuser:", currentUser);
+      addMovieToWatchlist(clickedMovie);
+    }
+
   }
 
   //creates Firestore doc in currentUser watchlist
@@ -120,6 +125,6 @@ export default function Movies() {
   function movieCardClick(movie) {
     setId(movie.id);
     setDisplayModal(true);
-    console.log("clicked movie:", movie);
+    // console.log("clicked movie:", movie);
   }
 }
