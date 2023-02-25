@@ -33,7 +33,6 @@ export default function Movies() {
 
   //this makes api call to get return user's search results
   const getSearchResults = async (searchInput) => {
-    console.log(searchInput);
     const data = await fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&query=${searchInput}&page=1&include_adult=false`
     );
@@ -126,6 +125,6 @@ export default function Movies() {
   function movieCardClick(movie) {
     setId(movie.id);
     setDisplayModal(true);
-    console.log("clicked movie:", movie);
+    // console.log("clicked movie:", movie);
   }
 }

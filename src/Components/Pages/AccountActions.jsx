@@ -33,7 +33,7 @@ export default function AccountActions() {
 
   function handleDeleteClick(){
     let text = "Are you sure you want to delete your account?"
-    if(window.confirm(text) == true){
+    if(window.confirm(text) === true){
       deleteAccount()
       navigate("/")
     }
