@@ -91,13 +91,19 @@ export default function Movies() {
   }
 
   function handleMovieClick(id, title, image) {
-    const clickedMovie = {
-      id: id,
-      title: title,
-      img: image,
-    };
-    console.log("clickedmovie:", clickedMovie, "currentuser:", currentUser);
-    addMovieToWatchlist(clickedMovie);
+    if (!currentUser) {
+      alert("Must be signed in to add to watchlist!")
+    }
+    else {
+      const clickedMovie = {
+        id: id,
+        title: title,
+        img: image,
+      };
+      // console.log("clickedmovie:", clickedMovie, "currentuser:", currentUser);
+      addMovieToWatchlist(clickedMovie);
+    }
+
   }
 
   //creates Firestore doc in currentUser watchlist
